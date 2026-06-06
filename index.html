@@ -11,30 +11,30 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- 02 Typography: Bebas Neue (display/headlines) + DM Sans (body) - distinctive pair -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
 
   <style>
     /* ════════════════════════════════════════════
-       DESIGN SYSTEM: Unity Soccer
-       Style: Liquid Glass
-       Typography: Bodoni Moda + Jost
-       Palette: Warm black · Ivory · Amber gold
+       03 RESTRAINED COLOR SYSTEM
+       Black · White · Gold · Warm grey
+       Logo is black/white JPEG → palette mirrors it
     ════════════════════════════════════════════ */
     :root {
-      --ink:        #1C1917;
-      --ink-soft:   #292524;
-      --ink-mid:    #44403C;
-      --paper:      #FAFAF9;
-      --paper-warm: #F5F5F4;
-      --gold:       #A16207;
-      --gold-light: #D97706;
-      --gold-dark:  #78350F;
-      --smoke:      #A8A29E;
-      --border:     rgba(28,25,23,0.08);
-      --border-inv: rgba(250,250,249,0.08);
+      --ink:        #0A0A0A;
+      --ink-soft:   #1A1A1A;
+      --ink-mid:    #3A3A3A;
+      --paper:      #FAFAF8;
+      --paper-warm: #F2F0EB;
+      --gold:       #C9A84C;
+      --gold-light: #E2C47A;
+      --gold-dark:  #A07830;
+      --smoke:      #888880;
+      --border:     rgba(10,10,10,0.10);
+      --border-inv: rgba(250,250,248,0.10);
 
-      --font-display: 'Bodoni Moda', serif;
-      --font-body:    'Jost', sans-serif;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
 
       --max-w:  1200px;
       --pad-x:  clamp(1.25rem, 4vw, 2.5rem);
@@ -66,39 +66,20 @@
       padding: 0 var(--pad-x);
     }
 
-    /* ── Skip link ── */
-    .skip-link {
-      position: fixed;
-      top: -100%;
-      left: 1rem;
-      z-index: 999;
-      padding: 0.75rem 1.5rem;
-      background: var(--ink);
-      color: var(--paper);
-      font-size: 0.875rem;
-      font-weight: 500;
-      border-radius: 4px;
-      transition: top 200ms var(--ease);
-    }
-    .skip-link:focus { top: 1rem; }
-
     /* ════════════════════════════════════════════
-       HEADER - Liquid Glass
-       Translucent backdrop with blur
+       HEADER - white bg so black logo is visible
     ════════════════════════════════════════════ */
     .header {
       position: fixed;
       inset: 0 0 auto;
       z-index: 100;
-      background: rgba(250,250,249,0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: var(--paper);
       border-bottom: 1px solid var(--border);
-      transition: box-shadow 400ms var(--ease);
+      transition: box-shadow 300ms var(--ease);
     }
 
     .header.scrolled {
-      box-shadow: 0 2px 32px rgba(28,25,23,0.06);
+      box-shadow: 0 2px 32px rgba(0,0,0,0.08);
     }
 
     .header .wrap {
@@ -108,6 +89,7 @@
       height: 96px;
     }
 
+    /* Logo: black on white - shown as-is, no filter */
     .logo {
       display: flex;
       align-items: center;
@@ -118,6 +100,7 @@
       height: 80px;
       width: auto;
       object-fit: contain;
+      /* mix-blend-mode: multiply removes the white JPEG bg on light surfaces */
       mix-blend-mode: multiply;
     }
 
@@ -132,7 +115,7 @@
       text-transform: uppercase;
       color: var(--ink-mid);
       border-radius: 6px;
-      transition: color 250ms var(--ease), background 250ms var(--ease);
+      transition: color 200ms var(--ease), background 200ms var(--ease);
     }
 
     .nav a:hover { color: var(--ink); background: var(--paper-warm); }
@@ -166,8 +149,9 @@
     .nav-toggle svg { display: block; width: 24px; height: 24px; }
 
     /* ════════════════════════════════════════════
-       HERO - Liquid Glass editorial
-       Fluid background with morphing glow
+       01 POINT OF VIEW: Dark-luxury editorial
+       Full-bleed black hero with gold accents,
+       oversized display type, intentional space
     ════════════════════════════════════════════ */
     .hero {
       position: relative;
@@ -180,18 +164,17 @@
       padding-top: 96px;
     }
 
+    /* Subtle noise texture */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(ellipse 120% 60% at 20% 80%, rgba(161,98,7,0.06) 0%, transparent 70%),
-        radial-gradient(ellipse 80% 50% at 90% 20%, rgba(161,98,7,0.04) 0%, transparent 60%),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.5;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.35;
       pointer-events: none;
     }
 
+    /* Gold diagonal accent line */
     .hero::after {
       content: '';
       position: absolute;
@@ -199,29 +182,9 @@
       right: 10%;
       width: 1px;
       height: 100%;
-      background: linear-gradient(to bottom, transparent 0%, var(--gold) 25%, var(--gold) 75%, transparent 100%);
-      opacity: 0.12;
+      background: linear-gradient(to bottom, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+      opacity: 0.18;
       pointer-events: none;
-    }
-
-    /* Morphing glass orb */
-    .hero-orb {
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, rgba(161,98,7,0.08), transparent 70%);
-      top: -15%;
-      right: -10%;
-      pointer-events: none;
-      filter: blur(60px);
-      animation: orbFloat 12s ease-in-out infinite alternate;
-    }
-
-    @keyframes orbFloat {
-      0%   { transform: translate(0, 0) scale(1); }
-      50%  { transform: translate(-30px, 20px) scale(1.08); }
-      100% { transform: translate(20px, -10px) scale(0.95); }
     }
 
     .hero-inner {
@@ -233,13 +196,13 @@
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.625rem;
       font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
     }
 
     .hero-eyebrow::before {
@@ -253,26 +216,27 @@
 
     .hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(4.5rem, 14vw, 11rem);
-      line-height: 0.88;
-      letter-spacing: -0.02em;
+      font-size: clamp(4.5rem, 12vw, 10rem);
+      line-height: 0.93;
+      letter-spacing: 0.02em;
       color: var(--paper);
+      text-transform: uppercase;
       margin-bottom: 2.5rem;
+      max-width: 14ch;
     }
 
     .hero h1 .accent {
       color: var(--gold);
       display: block;
-      font-style: italic;
     }
 
     .hero-body {
-      max-width: 48ch;
+      max-width: 52ch;
     }
 
     .hero-desc {
       font-size: 1.0625rem;
-      color: rgba(250,250,249,0.5);
+      color: rgba(250,250,248,0.5);
       line-height: 1.75;
     }
 
@@ -287,7 +251,7 @@
       flex: 0 1 auto;
     }
 
-    /* ── Buttons ── */
+    /* 04 Hierarchy: primary CTA gold, secondary outline */
     .btn {
       display: inline-flex;
       align-items: center;
@@ -298,7 +262,7 @@
       font-weight: 600;
       letter-spacing: 0.04em;
       border-radius: 4px;
-      transition: transform 300ms var(--ease), background 300ms var(--ease), box-shadow 300ms var(--ease);
+      transition: transform 220ms var(--ease), background 220ms var(--ease), box-shadow 220ms var(--ease);
       min-height: 52px;
       cursor: pointer;
     }
@@ -308,26 +272,26 @@
 
     .btn-gold {
       background: var(--gold);
-      color: var(--paper);
+      color: var(--ink);
       border: none;
-      box-shadow: 0 4px 24px rgba(161,98,7,0.3);
+      box-shadow: 0 4px 20px rgba(201,168,76,0.25);
     }
 
     .btn-gold:hover {
       background: var(--gold-light);
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(161,98,7,0.4);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.35);
     }
 
     .btn-ghost {
       background: transparent;
       color: var(--paper);
-      border: 1px solid rgba(250,250,249,0.2);
+      border: 1px solid rgba(250,250,248,0.2);
     }
 
     .btn-ghost:hover {
-      border-color: rgba(250,250,249,0.4);
-      background: rgba(250,250,249,0.04);
+      border-color: rgba(250,250,248,0.4);
+      background: rgba(250,250,248,0.04);
     }
 
     .btn-ink {
@@ -341,24 +305,47 @@
       transform: translateY(-2px);
     }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--border);
+    /* Hero scroll indicator */
+    .hero-scroll {
+      position: relative;
+      z-index: 2;
+      padding: 2rem var(--pad-x);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: rgba(250,250,248,0.25);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
-    .btn-outline:hover {
-      border-color: var(--ink);
-      background: var(--paper-warm);
+    .hero-scroll-line {
+      width: 40px;
+      height: 1px;
+      background: currentColor;
     }
 
-    /* Hero stats */
+    /* Hero watermark number */
+    .hero-watermark {
+      position: absolute;
+      right: 5%;
+      bottom: 10%;
+      font-family: var(--font-display);
+      font-size: clamp(10rem, 30vw, 28rem);
+      line-height: 0.8;
+      color: rgba(250,250,248,0.025);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    /* Hero stats badge */
     .hero-stats {
       display: flex;
       gap: 2.5rem;
       padding-top: 2rem;
       margin-top: 2rem;
-      border-top: 1px solid rgba(250,250,249,0.06);
+      border-top: 1px solid rgba(250,250,248,0.08);
     }
 
     .hero-stat {
@@ -368,20 +355,21 @@
 
     .hero-stat-n {
       font-family: var(--font-display);
-      font-size: 2.25rem;
+      font-size: 2rem;
       line-height: 1;
       color: var(--gold);
-      font-style: italic;
+      letter-spacing: 0.02em;
     }
 
     .hero-stat-l {
       font-size: 0.6875rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(250,250,249,0.35);
+      color: rgba(250,250,248,0.35);
       margin-top: 0.25rem;
     }
 
+    /* Hero sub visual accent */
     .hero-accent-line {
       width: 3rem;
       height: 2px;
@@ -389,55 +377,15 @@
       margin-bottom: 1.5rem;
     }
 
-    /* Hero watermark */
-    .hero-watermark {
-      position: absolute;
-      right: 5%;
-      bottom: 8%;
-      font-family: var(--font-display);
-      font-size: clamp(10rem, 30vw, 28rem);
-      line-height: 0.8;
-      color: rgba(250,250,249,0.02);
-      pointer-events: none;
-      user-select: none;
-      font-style: italic;
-    }
-
-    /* Hero scroll */
-    .hero-scroll {
-      position: relative;
-      z-index: 2;
-      padding: 2rem var(--pad-x);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: rgba(250,250,249,0.2);
-      font-size: 0.6875rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .hero-scroll-line {
-      width: 48px;
-      height: 1px;
-      background: currentColor;
-      animation: scrollPulse 2.5s ease-in-out infinite;
-    }
-
-    @keyframes scrollPulse {
-      0%, 100% { opacity: 0.3; width: 48px; }
-      50% { opacity: 1; width: 64px; }
-    }
-
     /* ════════════════════════════════════════════
-       SECTION SHARED
+       04 HIERARCHY: Section rhythm
     ════════════════════════════════════════════ */
-    .section { padding: clamp(5rem, 12vh, 8rem) 0; }
+    .section { padding: clamp(4rem, 10vh, 7rem) 0; }
 
     .section-label {
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.625rem;
       font-size: 0.6875rem;
       font-weight: 600;
       letter-spacing: 0.14em;
@@ -456,24 +404,18 @@
 
     .section-title {
       font-family: var(--font-display);
-      font-size: clamp(2.75rem, 6vw, 5rem);
-      line-height: 0.92;
-      letter-spacing: -0.02em;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
       color: var(--ink);
       margin-bottom: 1.5rem;
     }
 
-    .section-title .dim {
-      color: var(--smoke);
-      font-style: italic;
-    }
-
-    .section-title .gold {
-      color: var(--gold);
-    }
+    .section-title .dim { color: var(--smoke); }
 
     /* ════════════════════════════════════════════
-       ABOUT - Storytelling
+       ABOUT
     ════════════════════════════════════════════ */
     .about { background: var(--paper); }
 
@@ -492,6 +434,7 @@
 
     .about-copy p:last-of-type { margin-bottom: 2rem; }
 
+    /* Stats row */
     .about-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -511,9 +454,8 @@
       font-family: var(--font-display);
       font-size: 3.5rem;
       line-height: 1;
-      letter-spacing: -0.02em;
+      letter-spacing: 0.02em;
       color: var(--ink);
-      font-style: italic;
     }
 
     .about-stat-l {
@@ -524,21 +466,13 @@
       text-transform: uppercase;
     }
 
-    /* Visual panel - Liquid Glass */
+    /* Visual panel */
     .about-panel {
       position: relative;
       background: var(--ink);
       border-radius: 2px;
       overflow: hidden;
       aspect-ratio: 4 / 5;
-    }
-
-    .about-panel::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 30% 20%, rgba(161,98,7,0.1), transparent 60%);
-      pointer-events: none;
     }
 
     .about-panel-inner {
@@ -550,6 +484,7 @@
       padding: 2.5rem;
     }
 
+    /* Pitch graphic */
     .pitch-svg {
       width: 100%;
       max-width: 280px;
@@ -565,8 +500,7 @@
       font-size: 1rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(250,250,249,0.3);
-      font-style: italic;
+      color: rgba(250,250,248,0.35);
     }
 
     .about-panel-gold {
@@ -579,58 +513,7 @@
     }
 
     /* ════════════════════════════════════════════
-       STATS STRIP - Liquid Glass
-    ════════════════════════════════════════════ */
-    .stats-strip {
-      background: var(--ink);
-      padding: 4rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stats-strip::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 100% at 50% 50%, rgba(161,98,7,0.04), transparent 70%);
-      pointer-events: none;
-    }
-
-    .stats-strip-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    .stats-strip-item {
-      text-align: center;
-      padding: 1.5rem 1rem;
-      border-right: 1px solid rgba(250,250,249,0.06);
-    }
-
-    .stats-strip-item:last-child { border-right: none; }
-
-    .stats-strip-n {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      line-height: 1;
-      color: var(--gold);
-      font-style: italic;
-      margin-bottom: 0.375rem;
-    }
-
-    .stats-strip-l {
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(250,250,249,0.35);
-    }
-
-    /* ════════════════════════════════════════════
-       ATHLETES - Glass cards
+       ATHLETES
     ════════════════════════════════════════════ */
     .athletes { background: var(--paper-warm); }
 
@@ -639,37 +522,27 @@
       align-items: flex-end;
       justify-content: space-between;
       gap: 2rem;
-      margin-bottom: 3.5rem;
+      margin-bottom: 3rem;
       flex-wrap: wrap;
-    }
-
-    .athletes-head p {
-      color: var(--smoke);
-      font-size: 0.9375rem;
-      max-width: 32ch;
     }
 
     .athletes-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
     }
 
     .athlete-card {
       position: relative;
       background: var(--paper);
       padding: 2rem 1.75rem;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      transition: transform 400ms var(--ease), box-shadow 400ms var(--ease), border-color 400ms var(--ease);
+      transition: background 220ms var(--ease);
       cursor: default;
     }
 
-    .athlete-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(28,25,23,0.06);
-      border-color: rgba(161,98,7,0.2);
-    }
+    .athlete-card:hover { background: var(--paper-warm); }
 
     .athlete-num {
       font-family: var(--font-display);
@@ -677,7 +550,6 @@
       letter-spacing: 0.1em;
       color: var(--gold);
       margin-bottom: 1rem;
-      font-style: italic;
     }
 
     .athlete-avatar {
@@ -701,7 +573,8 @@
     .athlete-name {
       font-family: var(--font-display);
       font-size: 1.5rem;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       color: var(--ink);
       margin-bottom: 0.375rem;
       line-height: 1.1;
@@ -715,7 +588,7 @@
     .athlete-position {
       display: inline-block;
       margin-top: 1rem;
-      padding: 0.25rem 0.75rem;
+      padding: 0.25rem 0.625rem;
       font-size: 0.6875rem;
       font-weight: 600;
       letter-spacing: 0.08em;
@@ -726,26 +599,12 @@
     }
 
     /* ════════════════════════════════════════════
-       SERVICES - Liquid Glass dark
+       SERVICES - dark panel
     ════════════════════════════════════════════ */
-    .services {
-      background: var(--ink);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .services::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 100% 60% at 0% 50%, rgba(161,98,7,0.03), transparent 70%),
-        radial-gradient(ellipse 80% 40% at 100% 80%, rgba(161,98,7,0.02), transparent 60%);
-      pointer-events: none;
-    }
+    .services { background: var(--ink); }
 
     .services .section-title { color: var(--paper); }
-    .services .section-title .dim { color: rgba(250,250,249,0.15); }
+    .services .section-title .dim { color: rgba(250,250,248,0.2); }
     .services .section-label { color: var(--gold); }
     .services .section-label::before { background: var(--gold); }
 
@@ -753,26 +612,18 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1px;
-      background: rgba(250,250,249,0.04);
+      background: rgba(250,250,248,0.06);
       margin-top: 4rem;
-      position: relative;
-      z-index: 1;
+      border-top: 1px solid rgba(250,250,248,0.06);
     }
 
     .service-item {
-      padding: 2.75rem 2.25rem;
-      background: rgba(28,25,23,0.6);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      transition: background 400ms var(--ease), transform 400ms var(--ease);
-      position: relative;
+      padding: 2.5rem 2rem;
+      background: var(--ink);
+      transition: background 250ms var(--ease);
     }
 
-    .service-item:hover {
-      background: rgba(41,37,36,0.8);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
+    .service-item:hover { background: var(--ink-soft); }
 
     .service-num {
       font-family: var(--font-display);
@@ -780,13 +631,13 @@
       letter-spacing: 0.1em;
       color: var(--gold);
       margin-bottom: 1.75rem;
-      font-style: italic;
     }
 
     .service-item h3 {
       font-family: var(--font-display);
       font-size: 1.75rem;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
       color: var(--paper);
       margin-bottom: 1rem;
       line-height: 1.05;
@@ -794,72 +645,8 @@
 
     .service-item p {
       font-size: 0.9375rem;
-      color: rgba(250,250,249,0.35);
+      color: rgba(250,250,248,0.4);
       line-height: 1.7;
-    }
-
-    /* ════════════════════════════════════════════
-       CTA - Dedicated conversion section
-    ════════════════════════════════════════════ */
-    .cta-section {
-      background: var(--ink);
-      padding: 7rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
-      opacity: 0.2;
-    }
-
-    .cta-section::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 80% at 50% 50%, rgba(161,98,7,0.06), transparent 70%);
-      pointer-events: none;
-    }
-
-    .cta-inner {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 56ch;
-      margin: 0 auto;
-    }
-
-    .cta-inner h2 {
-      font-family: var(--font-display);
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: 0.92;
-      letter-spacing: -0.02em;
-      color: var(--paper);
-      margin-bottom: 1.5rem;
-    }
-
-    .cta-inner h2 .gold { color: var(--gold); }
-    .cta-inner h2 .dim { color: rgba(250,250,249,0.15); font-style: italic; }
-
-    .cta-inner p {
-      font-size: 1.0625rem;
-      color: rgba(250,250,249,0.4);
-      line-height: 1.75;
-      margin-bottom: 2.5rem;
-    }
-
-    .cta-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
     }
 
     /* ════════════════════════════════════════════
@@ -924,7 +711,7 @@
       background: var(--paper);
       border: 1px solid var(--border);
       padding: 2.5rem;
-      border-radius: 4px;
+      border-radius: 2px;
     }
 
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -953,7 +740,7 @@
       background: var(--paper);
       border: 1px solid var(--border);
       border-radius: 3px;
-      transition: border-color 250ms var(--ease), box-shadow 250ms var(--ease);
+      transition: border-color 200ms var(--ease), box-shadow 200ms var(--ease);
       min-height: 48px;
       width: 100%;
     }
@@ -962,7 +749,7 @@
     .field textarea:focus {
       outline: none;
       border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(161,98,7,0.12);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
     }
 
     .field textarea { min-height: 130px; resize: vertical; }
@@ -970,7 +757,7 @@
     /* ════════════════════════════════════════════
        FOOTER
     ════════════════════════════════════════════ */
-    .footer { background: var(--ink-soft); color: rgba(250,250,249,0.45); }
+    .footer { background: var(--ink-soft); color: rgba(250,250,248,0.45); }
 
     .footer-top {
       padding: 4rem 0 3rem;
@@ -980,6 +767,7 @@
       border-bottom: 1px solid var(--border-inv);
     }
 
+    /* Logo inverted in footer - white bg brand on dark bg */
     .footer-logo {
       display: flex;
       align-items: center;
@@ -990,6 +778,7 @@
       height: 80px;
       width: auto;
       object-fit: contain;
+      /* On dark bg, invert the black logo to white */
       filter: invert(1);
     }
 
@@ -1017,8 +806,8 @@
 
     .footer-links a {
       font-size: 0.9rem;
-      color: rgba(250,250,249,0.4);
-      transition: color 250ms var(--ease);
+      color: rgba(250,250,248,0.4);
+      transition: color 200ms var(--ease);
     }
 
     .footer-links a:hover { color: var(--paper); }
@@ -1037,14 +826,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(250,250,249,0.4);
-      transition: border-color 250ms var(--ease), color 250ms var(--ease), background 250ms var(--ease);
+      color: rgba(250,250,248,0.4);
+      transition: border-color 200ms var(--ease), color 200ms var(--ease), background 200ms var(--ease);
     }
 
     .footer-social a:hover {
       border-color: var(--gold);
       color: var(--gold);
-      background: rgba(161,98,7,0.06);
+      background: rgba(201,168,76,0.06);
     }
 
     .footer-social a svg { width: 18px; height: 18px; }
@@ -1063,18 +852,19 @@
     .footer-bottom a:hover { color: var(--gold-light); }
 
     /* ════════════════════════════════════════════
-       MOTION: Fluid scroll reveal
+       06 MOTION: scroll reveal - not AOS slop
+       Staggered, purposeful, fast exit
     ════════════════════════════════════════════ */
     [data-reveal] {
       opacity: 0;
-      transform: translateY(28px);
+      transform: translateY(24px);
       transition:
-        opacity 600ms var(--ease-out),
-        transform 600ms var(--ease-out);
+        opacity 550ms var(--ease-out),
+        transform 550ms var(--ease-out);
     }
 
-    [data-reveal="left"] { transform: translateX(-36px); }
-    [data-reveal="right"] { transform: translateX(36px); }
+    [data-reveal="left"] { transform: translateX(-32px); }
+    [data-reveal="right"] { transform: translateX(32px); }
     [data-reveal="scale"] { transform: scale(0.96); }
 
     [data-reveal].in {
@@ -1082,24 +872,20 @@
       transform: none;
     }
 
-    [data-delay="1"] { transition-delay: 100ms; }
-    [data-delay="2"] { transition-delay: 200ms; }
-    [data-delay="3"] { transition-delay: 300ms; }
-    [data-delay="4"] { transition-delay: 400ms; }
-    [data-delay="5"] { transition-delay: 500ms; }
-    [data-delay="6"] { transition-delay: 600ms; }
+    /* Stagger delays via data-delay */
+    [data-delay="1"] { transition-delay: 80ms; }
+    [data-delay="2"] { transition-delay: 160ms; }
+    [data-delay="3"] { transition-delay: 240ms; }
+    [data-delay="4"] { transition-delay: 320ms; }
+    [data-delay="5"] { transition-delay: 400ms; }
+    [data-delay="6"] { transition-delay: 480ms; }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
       [data-reveal] { opacity: 1; transform: none; transition: none; }
     }
 
     /* ════════════════════════════════════════════
-       MOBILE
+       07 MOBILE - designed, not shrunk
     ════════════════════════════════════════════ */
     @media (max-width: 768px) {
       .header .wrap { height: 72px; }
@@ -1122,22 +908,26 @@
       .nav-cta { margin-left: 0 !important; }
       .nav-toggle { display: block; }
 
+      /* Hero: single column, text fills screen */
       .hero h1 { font-size: clamp(3.5rem, 16vw, 6rem); }
       .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
-      .hero-orb { width: 300px; height: 300px; }
 
+      /* About stacks vertically, visual goes last */
       .about-grid { grid-template-columns: 1fr; }
       .about-panel { aspect-ratio: 16 / 9; order: -1; }
       .about-stats { grid-template-columns: 1fr 1fr 1fr; }
 
-      .stats-strip-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
-      .stats-strip-item:nth-child(2) { border-right: none; }
-
+      /* Athletes: 1 col */
       .athletes-grid { grid-template-columns: 1fr; }
+
+      /* Services: 1 col */
       .services-grid { grid-template-columns: 1fr; }
+
+      /* Contact stacks */
       .contact-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
 
+      /* Footer: 2 col then 1 col */
       .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
       .footer-brand { grid-column: 1 / -1; }
       .footer-bottom { flex-direction: column; text-align: center; }
@@ -1145,8 +935,6 @@
 
     @media (max-width: 480px) {
       .about-stats { grid-template-columns: 1fr; }
-      .stats-strip-grid { grid-template-columns: 1fr; }
-      .stats-strip-item { border-right: none; }
       .footer-top { grid-template-columns: 1fr; }
       .athletes-grid { grid-template-columns: 1fr; }
     }
@@ -1160,8 +948,6 @@
   </style>
 </head>
 <body>
-
-  <a href="#main" class="skip-link">Pular para o conteúdo</a>
 
   <!-- ════ HEADER ════ -->
   <header class="header" role="banner" id="top">
@@ -1193,377 +979,324 @@
     </div>
   </header>
 
-  <main id="main">
+  <!-- ════ HERO ════ -->
+  <section class="hero" aria-label="Início">
+    <span class="hero-watermark" aria-hidden="true">10</span>
 
-    <!-- ════ HERO ════ -->
-    <section class="hero" aria-label="Início">
-      <div class="hero-orb" aria-hidden="true"></div>
-      <span class="hero-watermark" aria-hidden="true">10</span>
-
-      <div class="hero-inner wrap">
-        <p class="hero-eyebrow" data-reveal>Agência de Gestão de Atletas</p>
-        <h1 data-reveal data-delay="1">
-          Eleve
-          <span class="accent">Sua Carreira.</span>
-        </h1>
-        <div class="hero-body">
-          <div class="hero-accent-line"></div>
-          <p class="hero-desc" data-reveal data-delay="2">
-            Gestão de carreira com visão estratégica, planejamento financeiro e marketing de alto nível dentro e fora dos gramados.
-          </p>
-          <div class="hero-stats" data-reveal data-delay="3">
-            <div class="hero-stat">
-              <span class="hero-stat-n">50+</span>
-              <span class="hero-stat-l">Atletas</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-n">10+</span>
-              <span class="hero-stat-l">Anos de Mercado</span>
-            </div>
-            <div class="hero-stat">
-              <span class="hero-stat-n">15</span>
-              <span class="hero-stat-l">Países</span>
-            </div>
+    <div class="hero-inner wrap">
+      <p class="hero-eyebrow" data-reveal>Agência de Gestão de Atletas</p>
+      <h1 data-reveal data-delay="1">
+        Eleve
+        <span class="accent">Sua Carreira.</span>
+      </h1>
+      <div class="hero-body">
+        <div class="hero-accent-line"></div>
+        <p class="hero-desc" data-reveal data-delay="2">
+          Gestão de carreira com visão estratégica, planejamento financeiro e marketing de alto nível dentro e fora dos gramados.
+        </p>
+        <div class="hero-stats" data-reveal data-delay="3">
+          <div class="hero-stat">
+            <span class="hero-stat-n">50+</span>
+            <span class="hero-stat-l">Atletas</span>
           </div>
-          <div class="hero-actions" data-reveal data-delay="4">
-            <a href="#contato" class="btn btn-gold">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Fale Conosco
-            </a>
-            <a href="#atletas" class="btn btn-ghost">
-              Ver Atletas
-            </a>
+          <div class="hero-stat">
+            <span class="hero-stat-n">10+</span>
+            <span class="hero-stat-l">Anos de Mercado</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-n">15</span>
+            <span class="hero-stat-l">Países</span>
           </div>
         </div>
-      </div>
-
-      <div class="hero-scroll" aria-hidden="true">
-        <span class="hero-scroll-line"></span>
-        <span>Scroll</span>
-      </div>
-    </section>
-
-    <!-- ════ ABOUT ════ -->
-    <section class="section about" id="sobre" aria-labelledby="about-title">
-      <div class="wrap">
-        <div class="about-grid">
-
-          <div class="about-copy">
-            <p class="section-label" data-reveal>Quem Somos</p>
-            <h2 class="section-title" id="about-title" data-reveal data-delay="1">
-              Unity Soccer<br>
-              <span class="dim">Gestão de Alto</span><br>
-              Rendimento
-            </h2>
-            <p data-reveal data-delay="2">
-              Há mais de 10 anos no mercado, a Unity Soccer é referência em gestão de carreiras de atletas de futebol. Representamos jogadores em todas as fases da carreira, de jovens promessas a atletas consagrados no cenário nacional e internacional.
-            </p>
-            <p data-reveal data-delay="3">
-              Nossa equipe é composta por agentes licenciados pela FIFA, advogados especializados em direito desportivo, consultores financeiros e profissionais de marketing, garantindo suporte integral para cada atleta.
-            </p>
-            <a href="#contato" class="btn btn-ink" style="margin-top:0.5rem" data-reveal data-delay="4">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              Entre em Contato
-            </a>
-
-            <div class="about-stats" data-reveal data-delay="5">
-              <div class="about-stat">
-                <div class="about-stat-n">50<sup style="font-size:1.5rem">+</sup></div>
-                <div class="about-stat-l">Atletas Representados</div>
-              </div>
-              <div class="about-stat">
-                <div class="about-stat-n">10<sup style="font-size:1.5rem">+</sup></div>
-                <div class="about-stat-l">Anos de Mercado</div>
-              </div>
-              <div class="about-stat">
-                <div class="about-stat-n">15</div>
-                <div class="about-stat-l">Países com Presença</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="about-panel" data-reveal="right" aria-hidden="true">
-            <div class="about-panel-inner">
-              <svg class="pitch-svg" viewBox="0 0 400 500" fill="none" stroke="white" stroke-width="2">
-                <rect x="20" y="20" width="360" height="460" rx="2"/>
-                <line x1="20" y1="250" x2="380" y2="250"/>
-                <circle cx="200" cy="250" r="50"/>
-                <circle cx="200" cy="250" r="4" fill="white"/>
-                <rect x="120" y="20" width="160" height="80"/>
-                <rect x="120" y="400" width="160" height="80"/>
-                <rect x="160" y="20" width="80" height="40"/>
-                <rect x="160" y="440" width="80" height="40"/>
-                <path d="M20,320 Q40,290 20,260" stroke-dasharray="4 4"/>
-                <path d="M380,320 Q360,290 380,260" stroke-dasharray="4 4"/>
-              </svg>
-            </div>
-            <div class="about-panel-label">Unity Soccer · Est. 2014</div>
-            <div class="about-panel-gold"></div>
-          </div>
-
+        <div class="hero-actions" data-reveal data-delay="4">
+          <a href="#contato" class="btn btn-gold">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Fale Conosco
+          </a>
+          <a href="#atletas" class="btn btn-ghost">
+            Ver Atletas
+          </a>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- ════ STATS STRIP ════ -->
-    <section class="stats-strip" aria-label="Números">
-      <div class="wrap">
-        <div class="stats-strip-grid">
-          <div class="stats-strip-item" data-reveal data-delay="1">
-            <div class="stats-strip-n">50+</div>
-            <div class="stats-strip-l">Atletas</div>
-          </div>
-          <div class="stats-strip-item" data-reveal data-delay="2">
-            <div class="stats-strip-n">10+</div>
-            <div class="stats-strip-l">Anos</div>
-          </div>
-          <div class="stats-strip-item" data-reveal data-delay="3">
-            <div class="stats-strip-n">15</div>
-            <div class="stats-strip-l">Países</div>
-          </div>
-          <div class="stats-strip-item" data-reveal data-delay="4">
-            <div class="stats-strip-n">100%</div>
-            <div class="stats-strip-l">Excelência</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="hero-scroll" aria-hidden="true">
+      <span class="hero-scroll-line"></span>
+      <span>Scroll</span>
+    </div>
+  </section>
 
-    <!-- ════ ATHLETES ════ -->
-    <section class="section athletes" id="atletas" aria-labelledby="athletes-title">
-      <div class="wrap">
-        <div class="athletes-head">
-          <div>
-            <p class="section-label" data-reveal>Nosso Plantel</p>
-            <h2 class="section-title" id="athletes-title" data-reveal data-delay="1">
-              Atletas<br>
-              <span class="dim">Representados</span>
-            </h2>
-          </div>
-          <p data-reveal data-delay="2">
-            Talentos de todas as posições, atuando nos principais clubes do Brasil e do exterior.
-          </p>
-        </div>
+  <!-- ════ ABOUT ════ -->
+  <section class="section about" id="sobre" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="about-grid">
 
-        <div class="athletes-grid" role="list">
-
-          <article class="athlete-card" role="listitem" data-reveal data-delay="1">
-            <div class="athlete-num">01</div>
-            <div class="athlete-avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <div class="athlete-name">Lucas Oliveira</div>
-            <div class="athlete-detail">28 anos | Brasil</div>
-            <div class="athlete-position">Atacante</div>
-          </article>
-
-          <article class="athlete-card" role="listitem" data-reveal data-delay="2">
-            <div class="athlete-num">02</div>
-            <div class="athlete-avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <div class="athlete-name">Gabriel Santos</div>
-            <div class="athlete-detail">24 anos | Brasil</div>
-            <div class="athlete-position">Meio Campo</div>
-          </article>
-
-          <article class="athlete-card" role="listitem" data-reveal data-delay="3">
-            <div class="athlete-num">03</div>
-            <div class="athlete-avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <div class="athlete-name">Pedro Costa</div>
-            <div class="athlete-detail">26 anos | Brasil</div>
-            <div class="athlete-position">Zagueiro</div>
-          </article>
-
-          <article class="athlete-card" role="listitem" data-reveal data-delay="1">
-            <div class="athlete-num">04</div>
-            <div class="athlete-avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <div class="athlete-name">Felipe Almeida</div>
-            <div class="athlete-detail">30 anos | Brasil</div>
-            <div class="athlete-position">Goleiro</div>
-          </article>
-
-          <article class="athlete-card" role="listitem" data-reveal data-delay="2">
-            <div class="athlete-num">05</div>
-            <div class="athlete-avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <div class="athlete-name">Rafael Lima</div>
-            <div class="athlete-detail">23 anos | Brasil</div>
-            <div class="athlete-position">Volante</div>
-          </article>
-
-          <article class="athlete-card" role="listitem" data-reveal data-delay="3">
-            <div class="athlete-num">06</div>
-            <div class="athlete-avatar" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <div class="athlete-name">Matheus Ribeiro</div>
-            <div class="athlete-detail">22 anos | Brasil</div>
-            <div class="athlete-position">Extremo</div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ════ SERVICES ════ -->
-    <section class="section services" id="servicos" aria-labelledby="services-title">
-      <div class="wrap">
-        <p class="section-label" data-reveal>O Que Fazemos</p>
-        <h2 class="section-title" id="services-title" data-reveal data-delay="1">
-          Serviços<br>
-          <span class="dim">Completos</span>
-        </h2>
-
-        <div class="services-grid">
-
-          <div class="service-item" data-reveal data-delay="1">
-            <div class="service-num">01</div>
-            <h3>Gestão de Carreira</h3>
-            <p>Planejamento estratégico de transferências, renovações e empréstimos. Definimos a trajetória ideal em clubes nacionais e internacionais.</p>
-          </div>
-
-          <div class="service-item" data-reveal data-delay="2">
-            <div class="service-num">02</div>
-            <h3>Consultoria Financeira</h3>
-            <p>Gestão patrimonial, planejamento tributário, investimentos e previdência para garantir segurança financeira durante e após a carreira.</p>
-          </div>
-
-          <div class="service-item" data-reveal data-delay="3">
-            <div class="service-num">03</div>
-            <h3>Marketing e Imagem</h3>
-            <p>Construção de marca pessoal, gestão de redes sociais, relações públicas e parcerias comerciais para maximizar o valor do atleta.</p>
-          </div>
-
-          <div class="service-item" data-reveal data-delay="1">
-            <div class="service-num">04</div>
-            <h3>Assessoria Jurídica</h3>
-            <p>Suporte em direito desportivo: contratos, litígios, direito de imagem, questões trabalhistas e procedimentos emigratórios.</p>
-          </div>
-
-          <div class="service-item" data-reveal data-delay="2">
-            <div class="service-num">05</div>
-            <h3>Scouting e Captação</h3>
-            <p>Rede de olheiros e análise de desempenho para identificar jovens talentos e conectar jovens talentos a clubes no Brasil e no exterior.</p>
-          </div>
-
-          <div class="service-item" data-reveal data-delay="3">
-            <div class="service-num">06</div>
-            <h3>Carreira Internacional</h3>
-            <p>Consultoria para transferências internacionais, adaptação cultural, vistos e conexão com clubes na Europa, Ásia e Américas.</p>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ════ CTA ════ -->
-    <section class="cta-section" aria-labelledby="cta-title">
-      <div class="wrap">
-        <div class="cta-inner">
-          <h2 id="cta-title" data-reveal data-delay="1">
-            Pronto para<br>
-            <span class="gold">Elevar sua Carreira?</span>
+        <div class="about-copy">
+          <p class="section-label" data-reveal>Quem Somos</p>
+          <h2 class="section-title" id="about-title" data-reveal data-delay="1">
+            Unity Soccer<br>
+            <span class="dim">Gestão de Alto</span><br>
+            Rendimento
           </h2>
           <p data-reveal data-delay="2">
-            Nossa equipe está pronta para ajudar você a alcançar o próximo nível. Entre em contato e descubra como podemos transformar seu potencial em resultados.
+            Há mais de 10 anos no mercado, a Unity Soccer é referência em gestão de carreiras de atletas de futebol. Representamos jogadores em todas as fases da carreira, de jovens promessas a atletas consagrados no cenário nacional e internacional.
           </p>
-          <div class="cta-actions" data-reveal data-delay="3">
-            <a href="#contato" class="btn btn-gold">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              Fale Conosco
-            </a>
-            <a href="#servicos" class="btn btn-ghost">
-              Ver Serviços
-            </a>
+          <p data-reveal data-delay="3">
+            Nossa equipe é composta por agentes licenciados pela FIFA, advogados especializados em direito desportivo, consultores financeiros e profissionais de marketing, garantindo suporte integral para cada atleta.
+          </p>
+          <a href="#contato" class="btn btn-ink" style="margin-top:0.5rem" data-reveal data-delay="4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Entre em Contato
+          </a>
+
+          <div class="about-stats" data-reveal data-delay="5">
+            <div class="about-stat">
+              <div class="about-stat-n">50<sup style="font-size:1.5rem">+</sup></div>
+              <div class="about-stat-l">Atletas Representados</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-n">10<sup style="font-size:1.5rem">+</sup></div>
+              <div class="about-stat-l">Anos de Mercado</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-n">15</div>
+              <div class="about-stat-l">Países com Presença</div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ════ CONTACT ════ -->
-    <section class="section contact" id="contato" aria-labelledby="contact-title">
-      <div class="wrap">
-        <div class="contact-grid">
-
-          <div class="contact-info" data-reveal="left">
-            <p class="section-label">Fale Conosco</p>
-            <h2 class="section-title" id="contact-title">
-              Vamos<br>
-              <span class="dim">Conversar.</span>
-            </h2>
-            <p class="contact-intro">
-              Tem interesse em nossos serviços ou quer representar um atleta? Entre em contato pelos canais abaixo.
-            </p>
-
-            <div class="contact-item">
-              <div class="contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              </div>
-              <div>
-                <div class="contact-item-label">Email</div>
-                <div class="contact-item-val">contato@unitysoccer.com.br</div>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              </div>
-              <div>
-                <div class="contact-item-label">Telefone / WhatsApp</div>
-                <div class="contact-item-val">+55 (11) 99999 8888</div>
-              </div>
-            </div>
-
-            <div class="contact-item">
-              <div class="contact-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-              <div>
-                <div class="contact-item-label">Endereço</div>
-                <div class="contact-item-val">Av. Paulista, 1000 | São Paulo, SP</div>
-              </div>
-            </div>
+        <div class="about-panel" data-reveal="right" aria-hidden="true">
+          <div class="about-panel-inner">
+            <svg class="pitch-svg" viewBox="0 0 400 500" fill="none" stroke="white" stroke-width="2">
+              <rect x="20" y="20" width="360" height="460" rx="2"/>
+              <line x1="20" y1="250" x2="380" y2="250"/>
+              <circle cx="200" cy="250" r="50"/>
+              <circle cx="200" cy="250" r="4" fill="white"/>
+              <rect x="120" y="20" width="160" height="80"/>
+              <rect x="120" y="400" width="160" height="80"/>
+              <rect x="160" y="20" width="80" height="40"/>
+              <rect x="160" y="440" width="80" height="40"/>
+              <path d="M20,320 Q40,290 20,260" stroke-dasharray="4 4"/>
+              <path d="M380,320 Q360,290 380,260" stroke-dasharray="4 4"/>
+            </svg>
           </div>
-
-          <div class="contact-form" data-reveal="right">
-            <form action="#" method="POST" novalidate>
-              <div class="form-row">
-                <div class="field">
-                  <label for="nome">Nome *</label>
-                  <input type="text" id="nome" name="nome" placeholder="Seu nome" required autocomplete="given-name">
-                </div>
-                <div class="field">
-                  <label for="email">Email *</label>
-                  <input type="email" id="email" name="email" placeholder="seu@email.com" required autocomplete="email">
-                </div>
-              </div>
-              <div class="field">
-                <label for="assunto">Assunto</label>
-                <input type="text" id="assunto" name="assunto" placeholder="Como podemos ajudar?">
-              </div>
-              <div class="field">
-                <label for="mensagem">Mensagem *</label>
-                <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem aqui..." required></textarea>
-              </div>
-              <button type="submit" class="btn btn-ink" style="width:100%;justify-content:center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-                Enviar Mensagem
-              </button>
-            </form>
-          </div>
-
+          <div class="about-panel-label">Unity Soccer · Est. 2014</div>
+          <div class="about-panel-gold"></div>
         </div>
-      </div>
-    </section>
 
-  </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ ATHLETES ════ -->
+  <section class="section athletes" id="atletas" aria-labelledby="athletes-title">
+    <div class="wrap">
+      <div class="athletes-head">
+        <div>
+          <p class="section-label" data-reveal>Nosso Plantel</p>
+          <h2 class="section-title" id="athletes-title" data-reveal data-delay="1">
+            Atletas<br>
+            <span class="dim">Representados</span>
+          </h2>
+        </div>
+        <p style="color:var(--smoke);font-size:0.9375rem;max-width:32ch" data-reveal data-delay="2">
+          Talentos de todas as posições, atuando nos principais clubes do Brasil e do exterior.
+        </p>
+      </div>
+
+      <div class="athletes-grid" role="list">
+
+        <article class="athlete-card" role="listitem" data-reveal data-delay="1">
+          <div class="athlete-num">01</div>
+          <div class="athlete-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="athlete-name">Lucas Oliveira</div>
+          <div class="athlete-detail">28 anos · Brasil</div>
+          <div class="athlete-position">Atacante</div>
+        </article>
+
+        <article class="athlete-card" role="listitem" data-reveal data-delay="2">
+          <div class="athlete-num">02</div>
+          <div class="athlete-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="athlete-name">Gabriel Santos</div>
+          <div class="athlete-detail">24 anos · Brasil</div>
+          <div class="athlete-position">Meio Campo</div>
+        </article>
+
+        <article class="athlete-card" role="listitem" data-reveal data-delay="3">
+          <div class="athlete-num">03</div>
+          <div class="athlete-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="athlete-name">Pedro Costa</div>
+          <div class="athlete-detail">26 anos · Brasil</div>
+          <div class="athlete-position">Zagueiro</div>
+        </article>
+
+        <article class="athlete-card" role="listitem" data-reveal data-delay="1">
+          <div class="athlete-num">04</div>
+          <div class="athlete-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="athlete-name">Felipe Almeida</div>
+          <div class="athlete-detail">30 anos · Brasil</div>
+          <div class="athlete-position">Goleiro</div>
+        </article>
+
+        <article class="athlete-card" role="listitem" data-reveal data-delay="2">
+          <div class="athlete-num">05</div>
+          <div class="athlete-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="athlete-name">Rafael Lima</div>
+          <div class="athlete-detail">23 anos · Brasil</div>
+          <div class="athlete-position">Volante</div>
+        </article>
+
+        <article class="athlete-card" role="listitem" data-reveal data-delay="3">
+          <div class="athlete-num">06</div>
+          <div class="athlete-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="athlete-name">Matheus Ribeiro</div>
+          <div class="athlete-detail">22 anos · Brasil</div>
+          <div class="athlete-position">Extremo</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ SERVICES ════ -->
+  <section class="section services" id="servicos" aria-labelledby="services-title">
+    <div class="wrap">
+      <p class="section-label" data-reveal>O Que Fazemos</p>
+      <h2 class="section-title" id="services-title" data-reveal data-delay="1">
+        Serviços<br>
+        <span class="dim">Completos</span>
+      </h2>
+
+      <div class="services-grid">
+
+        <div class="service-item" data-reveal data-delay="1">
+          <div class="service-num">01</div>
+          <h3>Gestão de Carreira</h3>
+          <p>Planejamento estratégico de transferências, renovações e empréstimos. Definimos a trajetória ideal em clubes nacionais e internacionais.</p>
+        </div>
+
+        <div class="service-item" data-reveal data-delay="2">
+          <div class="service-num">02</div>
+          <h3>Consultoria Financeira</h3>
+          <p>Gestão patrimonial, planejamento tributário, investimentos e previdência para garantir segurança financeira durante e após a carreira.</p>
+        </div>
+
+        <div class="service-item" data-reveal data-delay="3">
+          <div class="service-num">03</div>
+          <h3>Marketing e Imagem</h3>
+          <p>Construção de marca pessoal, gestão de redes sociais, relações públicas e parcerias comerciais para maximizar o valor do atleta.</p>
+        </div>
+
+        <div class="service-item" data-reveal data-delay="1">
+          <div class="service-num">04</div>
+          <h3>Assessoria Jurídica</h3>
+          <p>Suporte em direito desportivo: contratos, litígios, direito de imagem, questões trabalhistas e procedimentos emigratórios.</p>
+        </div>
+
+        <div class="service-item" data-reveal data-delay="2">
+          <div class="service-num">05</div>
+          <h3>Scouting e Captação</h3>
+          <p>Rede de olheiros e análise de desempenho para identificar jovens talentos e conectar jovens talentos a clubes no Brasil e no exterior.</p>
+        </div>
+
+        <div class="service-item" data-reveal data-delay="3">
+          <div class="service-num">06</div>
+          <h3>Carreira Internacional</h3>
+          <p>Consultoria para transferências internacionais, adaptação cultural, vistos e conexão com clubes na Europa, Ásia e Américas.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════ CONTACT ════ -->
+  <section class="section contact" id="contato" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact-grid">
+
+        <div class="contact-info" data-reveal="left">
+          <p class="section-label">Fale Conosco</p>
+          <h2 class="section-title" id="contact-title">
+            Vamos<br>
+            <span class="dim">Conversar.</span>
+          </h2>
+          <p class="contact-intro">
+            Tem interesse em nossos serviços ou quer representar um atleta? Entre em contato pelos canais abaixo.
+          </p>
+
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val">contato@unitysoccer.com.br</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Telefone / WhatsApp</div>
+              <div class="contact-item-val">+55 (11) 99999 8888</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-item-label">Endereço</div>
+              <div class="contact-item-val">Av. Paulista, 1000 · São Paulo, SP</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form" data-reveal="right">
+          <form action="#" method="POST" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="nome">Nome *</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome" required autocomplete="given-name">
+              </div>
+              <div class="field">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="seu@email.com" required autocomplete="email">
+              </div>
+            </div>
+            <div class="field">
+              <label for="assunto">Assunto</label>
+              <input type="text" id="assunto" name="assunto" placeholder="Como podemos ajudar?">
+            </div>
+            <div class="field">
+              <label for="mensagem">Mensagem *</label>
+              <textarea id="mensagem" name="mensagem" placeholder="Escreva sua mensagem aqui..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-ink" style="width:100%;justify-content:center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Enviar Mensagem
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <!-- ════ FOOTER ════ -->
   <footer class="footer" role="contentinfo">
@@ -1635,6 +1368,7 @@
         : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
     }
 
+    /* Close nav when link clicked */
     document.querySelectorAll('#main-nav a').forEach(function(a) {
       a.addEventListener('click', function() {
         var nav = document.getElementById('main-nav');
@@ -1645,6 +1379,7 @@
       });
     });
 
+    /* Escape key closes nav */
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         var nav = document.getElementById('main-nav');
@@ -1653,6 +1388,7 @@
       }
     });
 
+    /* Close on resize */
     window.addEventListener('resize', function() {
       if (window.innerWidth > 768) {
         document.getElementById('main-nav').classList.remove('open');
@@ -1665,7 +1401,7 @@
       header.classList.toggle('scrolled', window.scrollY > 10);
     }, { passive: true });
 
-    /* ── Scroll reveal ── */
+    /* ── 06 Motion: purposeful scroll reveal ── */
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
@@ -1680,6 +1416,7 @@
         observer.observe(el);
       });
     } else {
+      /* Fallback: show all immediately */
       document.querySelectorAll('[data-reveal]').forEach(function(el) {
         el.classList.add('in');
       });
