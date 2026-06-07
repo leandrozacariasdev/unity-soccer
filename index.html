@@ -1410,6 +1410,19 @@
         transform: scale(0.97);
       }
 
+      /* Hide nav on hero, show on scroll */
+      .bottom-nav {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+        pointer-events: none;
+        transition: opacity 400ms var(--ease), transform 400ms var(--ease);
+      }
+      .bottom-nav.visible {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+      }
+
       /* Add bottom padding to body so content isn't hidden behind nav */
       body { padding-bottom: 80px; }
 
@@ -2779,8 +2792,10 @@
 
     /* ── Back to top visibility ── */
     var btt = document.getElementById('btt');
+    var bottomNav = document.getElementById('bottom-nav');
     function toggleBtt() {
       btt.classList.toggle('visible', window.scrollY > 400);
+      if (bottomNav) bottomNav.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
     }
     window.addEventListener('scroll', toggleBtt, { passive: true });
   </script>
