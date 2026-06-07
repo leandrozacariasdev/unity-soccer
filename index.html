@@ -1999,11 +1999,11 @@
       if (!logo || !ball) return;
       var logoW = logo.offsetWidth;
       var logoH = logo.offsetHeight;
-      var ballSize = logoW * 0.32;
+      var ballSize = logoW * 0.22;
       ball.style.width = ballSize + 'px';
       ball.style.height = ballSize + 'px';
-      ball.style.left = (logoW * 0.10) + 'px';
-      ball.style.top = (logoH * 0.02) + 'px';
+      ball.style.left = ((logoW - ballSize) / 2) + 'px';
+      ball.style.top = ((logoH * 0.28) - (ballSize / 2)) + 'px';
     }
     positionLogoBall();
     window.addEventListener('resize', positionLogoBall);
