@@ -1220,55 +1220,10 @@
        07 MOBILE-NATIVE: Built for thumbs, not mice
     ════════════════════════════════════════════ */
     @media (max-width: 768px) {
-      /* ── Header: hamburger + overlay nav ── */
+      /* ── Header: minimal, no hamburger ── */
       .header .wrap { height: 64px; }
       .logo img { height: 48px; }
-
-      .nav-toggle {
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-        width: 44px;
-        height: 44px;
-        padding: 0;
-        color: var(--ink);
-        background: transparent;
-        border: none;
-        z-index: 102;
-      }
-      .nav-toggle svg { width: 24px; height: 24px; }
-
-      .nav {
-        position: fixed;
-        inset: 0;
-        z-index: 101;
-        background: var(--paper);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-        transform: translateX(100%);
-        transition: transform 350ms cubic-bezier(0.32, 0.72, 0, 1);
-        padding: 2rem;
-      }
-      .nav.open { transform: translateX(0); }
-      .nav a {
-        font-size: 1.5rem;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        color: var(--ink);
-        padding: 0.75rem 1rem;
-      }
-      .nav a.nav-cta {
-        margin-left: 0;
-        background: var(--ink) !important;
-        color: var(--paper) !important;
-        padding: 0.875rem 2rem !important;
-        border-radius: 6px !important;
-        font-size: 1.125rem;
-      }
+      .nav, .nav-toggle { display: none !important; }
 
       /* ── Bottom Navigation Bar ── */
       .bottom-nav {
