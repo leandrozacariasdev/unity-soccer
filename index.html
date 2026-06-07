@@ -1403,13 +1403,24 @@
     /* ── Hero parallax (25% scroll speed) ── */
     var hero = document.querySelector('.hero');
     if (hero) {
-      window.addEventListener('scroll', function() {
+      var parallaxSpeed = 0.3;
+      var maxScroll = window.innerHeight * 0.8;
+      
+      function updateParallax() {
         var scrolled = window.scrollY;
-        var yPos = scrolled * 0.25;
+        var progress = Math.min(scrolled / maxScroll, 1);
+        var yPos = scrolled * parallaxSpeed;
+        var scale = 1 + (progress * 0.1);
         var isMobile = window.innerWidth <= 768;
+        
         hero.style.backgroundPositionX = isMobile ? '15%' : 'right -100px';
         hero.style.backgroundPositionY = 'top ' + yPos + 'px';
-      }, { passive: true });
+        hero.style.backgroundSize = isMobile ? 'auto ' + (100 + (progress * 20)) + '%' : 'auto ' + (140 + (progress * 10)) + '%';
+        
+        requestAnimationFrame(updateParallax);
+      }
+      
+      requestAnimationFrame(updateParallax);
     }
 
     /* ── 06 Motion: purposeful scroll reveal ── */
