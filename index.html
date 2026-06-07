@@ -1117,13 +1117,21 @@
               <circle cx="200" cy="60" r="8" fill="currentColor" opacity="0.9">
                 <animate attributeName="cx" values="200;170;230;200" dur="6s" repeatCount="indefinite" calcMode="easeInOut"/>
               </circle>
-              <!-- The Ball -->
+              <!-- The Ball: passes between players -->
               <g>
                 <circle r="6" fill="var(--gold)" stroke="none">
-                  <animateMotion path="M 200 420 Q 160 350 140 300 Q 180 250 200 200 Q 240 150 280 120 Q 200 100 200 60" dur="8s" repeatCount="indefinite" rotate="auto"/>
+                  <animateMotion 
+                    path="M 200 420 L 140 300 L 80 250 L 320 350 L 280 200 L 200 250 L 340 80 L 60 100 L 200 60" 
+                    keyPoints="0;0.15;0.15;0.3;0.3;0.45;0.45;0.6;0.6;0.75;0.75;0.9;0.9;1"
+                    keyTimes="0;0.12;0.18;0.3;0.36;0.48;0.54;0.66;0.72;0.84;0.9;0.96;0.98;1"
+                    dur="10s" repeatCount="indefinite" calcMode="linear" rotate="auto"/>
                 </circle>
                 <circle r="2" fill="#fff" opacity="0.8">
-                  <animateMotion path="M 200 420 Q 160 350 140 300 Q 180 250 200 200 Q 240 150 280 120 Q 200 100 200 60" dur="8s" repeatCount="indefinite" rotate="auto"/>
+                  <animateMotion 
+                    path="M 200 420 L 140 300 L 80 250 L 320 350 L 280 200 L 200 250 L 340 80 L 60 100 L 200 60" 
+                    keyPoints="0;0.15;0.15;0.3;0.3;0.45;0.45;0.6;0.6;0.75;0.75;0.9;0.9;1"
+                    keyTimes="0;0.12;0.18;0.3;0.36;0.48;0.54;0.66;0.72;0.84;0.9;0.96;0.98;1"
+                    dur="10s" repeatCount="indefinite" calcMode="linear" rotate="auto"/>
                 </circle>
               </g>
             </svg>
