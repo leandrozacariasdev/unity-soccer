@@ -597,6 +597,178 @@
     }
 
     /* ════════════════════════════════════════════
+       ATHLETE MODAL - Ficha Técnica
+    ════════════════════════════════════════════ */
+    .athlete-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 300ms var(--ease);
+    }
+
+    .athlete-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .athlete-modal {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      max-height: 90vh;
+      background: var(--ink-soft);
+      border: 1px solid var(--border-inv);
+      border-radius: 4px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      transform: translateY(24px) scale(0.98);
+      transition: transform 300ms var(--ease);
+    }
+
+    .athlete-modal-overlay.open .athlete-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .athlete-modal-photo {
+      position: relative;
+      background-size: cover;
+      background-position: center top;
+      min-height: 400px;
+    }
+
+    .athlete-modal-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--ink-soft) 100%);
+    }
+
+    .athlete-modal-body {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    .athlete-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10,10,10,0.6);
+      border: 1px solid rgba(250,250,248,0.1);
+      border-radius: 50%;
+      color: var(--paper);
+      cursor: pointer;
+      transition: background 200ms var(--ease), transform 200ms var(--ease);
+    }
+
+    .athlete-modal-close:hover {
+      background: var(--gold);
+      transform: rotate(90deg);
+    }
+
+    .athlete-modal-name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--paper);
+      margin-bottom: 0.5rem;
+    }
+
+    .athlete-modal-position {
+      display: inline-block;
+      padding: 0.375rem 1rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--gold);
+      color: var(--paper);
+      border-radius: 2px;
+      width: fit-content;
+      margin-bottom: 1.5rem;
+    }
+
+    .athlete-modal-bio {
+      font-size: 0.9375rem;
+      color: rgba(250,250,248,0.55);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      max-width: 45ch;
+    }
+
+    .athlete-modal-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(250,250,248,0.06);
+      border: 1px solid rgba(250,250,248,0.06);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .athlete-stat {
+      padding: 1.25rem 1rem;
+      background: var(--ink);
+      text-align: center;
+    }
+
+    .athlete-stat-value {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--gold);
+      margin-bottom: 0.25rem;
+    }
+
+    .athlete-stat-label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(250,250,248,0.35);
+    }
+
+    @media (max-width: 768px) {
+      .athlete-modal {
+        grid-template-columns: 1fr;
+        max-height: 85vh;
+      }
+      .athlete-modal-photo {
+        min-height: 200px;
+        max-height: 30vh;
+      }
+      .athlete-modal-photo::after {
+        background: linear-gradient(to bottom, transparent 40%, var(--ink-soft) 100%);
+      }
+      .athlete-modal-body {
+        padding: 1.5rem;
+      }
+      .athlete-modal-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ════════════════════════════════════════════
        NEWS
     ════════════════════════════════════════════ */
     .news { background: var(--paper); }
@@ -1085,55 +1257,6 @@
               <rect x="120" y="400" width="160" height="80"/>
               <rect x="160" y="20" width="80" height="40"/>
               <rect x="160" y="440" width="80" height="40"/>
-              <!-- Player 1 -->
-              <circle cx="200" cy="420" r="8" fill="currentColor" opacity="0.9">
-                <animate attributeName="cy" values="420;380;420" dur="4s" repeatCount="indefinite" calcMode="easeInOut"/>
-              </circle>
-              <!-- Player 2 -->
-              <circle cx="140" cy="300" r="8" fill="currentColor" opacity="0.9">
-                <animate attributeName="cx" values="140;180;140" dur="5s" repeatCount="indefinite" calcMode="easeInOut"/>
-              </circle>
-              <!-- Player 3 -->
-              <circle cx="280" cy="200" r="8" fill="currentColor" opacity="0.9">
-                <animate attributeName="cy" values="200;240;200" dur="3.5s" repeatCount="indefinite" calcMode="easeInOut"/>
-              </circle>
-              <!-- Player 4 -->
-              <circle cx="80" cy="250" r="8" fill="currentColor" opacity="0.9">
-                <animate attributeName="cx" values="80;100;80" dur="4.5s" repeatCount="indefinite" calcMode="easeInOut"/>
-              </circle>
-              <!-- Player 5 -->
-              <circle cx="320" cy="350" r="8" fill="currentColor" opacity="0.9">
-                <animate attributeName="cy" values="350;320;350" dur="5.5s" repeatCount="indefinite" calcMode="easeInOut"/>
-              </circle>
-              <!-- Player 6 -->
-              <circle cx="60" cy="100" r="8" fill="currentColor" opacity="0.9">
-                <animate attributeName="cy" values="100;120;100" dur="3s" repeatCount="indefinite" calcMode="easeInOut"/>
-              </circle>
-              <!-- Player 7 -->
-              <circle cx="340" cy="80" r="8" fill="currentColor" opacity="0.9">
-                <animate attributeName="cx" values="340;300;340" dur="6s" repeatCount="indefinite" calcMode="easeInOut"/>
-              </circle>
-              <!-- Player 8 (goalkeeper) -->
-              <circle cx="200" cy="60" r="8" fill="currentColor" opacity="0.9">
-                <animate attributeName="cx" values="200;170;230;200" dur="6s" repeatCount="indefinite" calcMode="easeInOut"/>
-              </circle>
-              <!-- The Ball: passes between players -->
-              <g>
-                <circle r="6" fill="var(--gold)" stroke="none">
-                  <animateMotion 
-                    path="M 200 420 L 140 300 L 80 250 L 320 350 L 280 200 L 200 250 L 340 80 L 60 100 L 200 60" 
-                    keyPoints="0;0.111;0.111;0.176;0.176;0.362;0.362;0.478;0.478;0.549;0.549;0.718;0.718;0.934;0.934;1"
-                    keyTimes="0;0.06;0.14;0.2;0.28;0.34;0.42;0.48;0.56;0.62;0.7;0.76;0.84;0.9;0.98;1"
-                    dur="15s" repeatCount="indefinite" calcMode="linear" rotate="auto"/>
-                </circle>
-                <circle r="2" fill="#fff" opacity="0.8">
-                  <animateMotion 
-                    path="M 200 420 L 140 300 L 80 250 L 320 350 L 280 200 L 200 250 L 340 80 L 60 100 L 200 60" 
-                    keyPoints="0;0.111;0.111;0.176;0.176;0.362;0.362;0.478;0.478;0.549;0.549;0.718;0.718;0.934;0.934;1"
-                    keyTimes="0;0.06;0.14;0.2;0.28;0.34;0.42;0.48;0.56;0.62;0.7;0.76;0.84;0.9;0.98;1"
-                    dur="15s" repeatCount="indefinite" calcMode="linear" rotate="auto"/>
-                </circle>
-              </g>
             </svg>
           </div>
           <div class="about-panel-label">Unity Soccer · Est. 2014</div>
