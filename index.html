@@ -2463,6 +2463,7 @@
       if (!logo || !ball) return;
       var logoW = logo.offsetWidth;
       var logoH = logo.offsetHeight;
+      if (!logoW || !logoH) return;
       var ballSize = 59;
       ball.style.width = ballSize + 'px';
       ball.style.height = Math.round(ballSize * 77 / 128) + 'px';
@@ -2471,6 +2472,11 @@
       ball.style.top = ((logoH * 0.30) - (ballH / 2) + 8) + 'px';
     }
     positionLogoBall();
+    var logoImg = document.getElementById('logo-img');
+    if (logoImg) {
+      if (logoImg.complete) positionLogoBall();
+      else logoImg.addEventListener('load', positionLogoBall, { once: true });
+    }
     window.addEventListener('resize', positionLogoBall);
 
     /* ── Header slide-up on scroll ── */
