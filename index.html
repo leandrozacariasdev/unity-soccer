@@ -142,13 +142,12 @@
       flex-shrink: 0;
     }
 
-    .logo img {
+    #logo-img {
       height: 80px;
       width: auto;
       object-fit: contain;
       /* Invert black logo to white on dark header */
       filter: invert(1);
-      mix-blend-mode: normal !important;
     }
 
     /* ── Nav ── */
@@ -1280,7 +1279,7 @@
         padding-top: 1rem;
         justify-content: flex-start;
       }
-      .logo img { height: 48px; }
+      #logo-img { height: 48px; }
       .nav, .nav-toggle { display: none !important; }
 
       /* ── Bottom Navigation Bar ── */
@@ -1658,8 +1657,8 @@
     <div class="wrap">
       <a href="#top" class="logo" aria-label="Unity Soccer, Página inicial">
         <div style="position:relative;display:inline-block;" id="logo-container">
-          <img src="images/logo-spin.jpeg" alt="Unity Soccer" width="200" style="height:80px;width:auto;object-fit:contain;display:block;mix-blend-mode:multiply;" id="logo-img">
-          <img src="images/rotate.gif" alt="" width="59" style="position:absolute;width:59px;pointer-events:none;mix-blend-mode:multiply;" id="logo-ball">
+          <img src="images/logo-spin.jpeg" alt="Unity Soccer" width="200" style="display:block;" id="logo-img">
+          <img src="images/rotate.gif" alt="" width="59" style="position:absolute;pointer-events:none;" id="logo-ball">
         </div>
       </a>
 
