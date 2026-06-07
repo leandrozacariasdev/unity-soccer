@@ -2465,9 +2465,10 @@
       var logoH = logo.offsetHeight;
       var ballSize = 59;
       ball.style.width = ballSize + 'px';
-      ball.style.height = ballSize + 'px';
+      ball.style.height = Math.round(ballSize * 77 / 128) + 'px';
+      var ballH = ball.offsetHeight || Math.round(ballSize * 77 / 128);
       ball.style.left = ((logoW - ballSize) / 2 - 5) + 'px';
-      ball.style.top = ((logoH * 0.30) - (ballSize / 2) + 8) + 'px';
+      ball.style.top = ((logoH * 0.30) - (ballH / 2) + 8) + 'px';
     }
     positionLogoBall();
     window.addEventListener('resize', positionLogoBall);
