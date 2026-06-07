@@ -1176,7 +1176,6 @@
     @media (max-width: 768px) {
       .header .wrap { height: 72px; }
       .logo img, .footer-logo img { height: 56px; }
-      .logo img[src*="rotate.gif"] { top: -6px !important; left: -12% !important; width: 45px !important; }
       .nav { display: none; flex-direction: column; align-items: stretch; }
       .nav.open {
         display: flex;
@@ -1246,9 +1245,9 @@
   <header class="header" role="banner" id="top">
     <div class="wrap">
       <a href="#top" class="logo" aria-label="Unity Soccer, Página inicial">
-        <div style="position:relative;display:inline-block;">
-          <img src="images/logo-spin.jpeg" alt="Unity Soccer" width="200" style="height:80px;width:auto;object-fit:contain;display:block;mix-blend-mode:multiply;">
-          <img src="images/rotate.gif" alt="" width="59" style="position:absolute;top:-8px;left:-9%;width:59px;pointer-events:none;mix-blend-mode:multiply;">
+        <div style="position:relative;display:inline-block;" id="logo-container">
+          <img src="images/logo-spin.jpeg" alt="Unity Soccer" width="200" style="height:80px;width:auto;object-fit:contain;display:block;mix-blend-mode:multiply;" id="logo-img">
+          <img src="images/rotate.gif" alt="" width="59" style="position:absolute;width:59px;pointer-events:none;mix-blend-mode:multiply;" id="logo-ball">
         </div>
       </a>
 
@@ -1992,6 +1991,22 @@
         document.getElementById('main-nav').classList.remove('open');
       }
     });
+
+    /* ── Logo ball positioning ── */
+    function positionLogoBall() {
+      var logo = document.getElementById('logo-img');
+      var ball = document.getElementById('logo-ball');
+      if (!logo || !ball) return;
+      var logoW = logo.offsetWidth;
+      var logoH = logo.offsetHeight;
+      var ballSize = logoW * 0.32;
+      ball.style.width = ballSize + 'px';
+      ball.style.height = ballSize + 'px';
+      ball.style.left = (logoW * 0.10) + 'px';
+      ball.style.top = (logoH * 0.02) + 'px';
+    }
+    positionLogoBall();
+    window.addEventListener('resize', positionLogoBall);
 
     /* ── Header slide-up on scroll ── */
     var headerEl = document.querySelector('.header');
