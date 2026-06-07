@@ -27,10 +27,10 @@
       --ink-mid:    #3A3A3A;
       --paper:      #FAFAF8;
       --paper-warm: #F2F0EB;
-      --gold:       #C44A7C;
-      --gold-light: #D66A96;
-      --gold-dark:  #A03360;
-      --smoke:      #888880;
+      --gold:       #B84070;
+      --gold-light: #D05A8A;
+      --gold-dark:  #8F3358;
+      --smoke:      #6B6B6B;
       --border:     rgba(10,10,10,0.10);
       --border-inv: rgba(250,250,248,0.10);
 
@@ -359,7 +359,7 @@
 
     .section-title {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-size: clamp(2rem, 5vw, 4.5rem);
       line-height: 0.95;
       letter-spacing: 0.02em;
       text-transform: uppercase;
@@ -458,7 +458,7 @@
       font-size: 1rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(250,250,248,0.35);
+      color: rgba(250,250,248,0.55);
     }
 
     .about-panel-gold {
@@ -507,7 +507,8 @@
       background-position: center;
     }
 
-    .athlete-card:hover {
+    .athlete-card:hover,
+    .athlete-card.touched {
       transform: translateY(-4px);
     }
 
@@ -543,7 +544,7 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--gold-light);
       transition: opacity 200ms var(--ease);
       cursor: pointer;
     }
@@ -554,7 +555,8 @@
       transition: transform 200ms var(--ease);
     }
 
-    .athlete-card:hover .athlete-cta svg {
+    .athlete-card:hover .athlete-cta svg,
+    .athlete-card.touched .athlete-cta svg {
       transform: translateX(3px);
     }
 
@@ -565,7 +567,8 @@
 
     .services .section-title { color: var(--paper); }
     .services .section-title .dim { color: rgba(250,250,248,0.2); }
-    .services .section-label::before { background: var(--gold); }
+    .services .section-label { color: var(--gold-light); }
+    .services .section-label::before { background: var(--gold-light); }
 
     .services-grid {
       display: grid;
@@ -611,9 +614,18 @@
 
     .service-item p {
       font-size: 0.9375rem;
-      color: rgba(250,250,248,0.4);
+      color: rgba(250,250,248,0.55);
       line-height: 1.7;
     }
+
+    /* Desktop: always show service body, hide accordion chevron */
+    @media (min-width: 769px) {
+      .service-chevron { display: none; }
+      .service-body { max-height: none !important; overflow: visible !important; padding-left: 0 !important; padding-top: 0.75rem !important; }
+    }
+
+    /* Mobile-only components hidden on desktop */
+    .bottom-nav, .fab-wa, .modal-drag-handle { display: none; }
 
     /* ════════════════════════════════════════════
        ATHLETE MODAL - Ficha Técnica
@@ -755,7 +767,7 @@
       font-size: 2rem;
       line-height: 1;
       letter-spacing: 0.02em;
-      color: var(--gold);
+      color: var(--gold-light);
       margin-bottom: 0.25rem;
     }
 
@@ -764,26 +776,54 @@
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(250,250,248,0.35);
+      color: rgba(250,250,248,0.55);
     }
 
     @media (max-width: 768px) {
+      .athlete-modal-overlay {
+        padding: 1rem;
+        align-items: flex-end;
+      }
       .athlete-modal {
         grid-template-columns: 1fr;
-        max-height: 85vh;
+        max-height: 88vh;
+        border-radius: 8px 8px 0 0;
+        transform: translateY(100%) scale(1);
+      }
+      .athlete-modal-overlay.open .athlete-modal {
+        transform: translateY(0);
       }
       .athlete-modal-photo {
-        min-height: 200px;
-        max-height: 30vh;
+        min-height: 180px;
+        max-height: 28vh;
       }
       .athlete-modal-photo::after {
         background: linear-gradient(to bottom, transparent 40%, var(--ink-soft) 100%);
       }
       .athlete-modal-body {
-        padding: 1.5rem;
+        padding: 1.25rem;
+      }
+      .athlete-modal-close {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 44px;
+        height: 44px;
+      }
+      .athlete-modal-name {
+        font-size: 1.75rem;
+      }
+      .athlete-modal-bio {
+        font-size: 0.875rem;
+        margin-bottom: 1.25rem;
       }
       .athlete-modal-stats {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .athlete-stat {
+        padding: 0.875rem 0.5rem;
+      }
+      .athlete-stat-value {
+        font-size: 1.5rem;
       }
     }
 
@@ -808,7 +848,8 @@
       transition: transform 300ms var(--ease), filter 300ms var(--ease);
     }
 
-    .gallery-item:hover {
+    .gallery-item:hover,
+    .gallery-item.touched {
       transform: scale(1.02);
       filter: brightness(1.1);
     }
@@ -833,7 +874,8 @@
       transition: opacity 300ms var(--ease);
     }
 
-    .gallery-item:hover .gallery-item-overlay {
+    .gallery-item:hover .gallery-item-overlay,
+    .gallery-item.touched .gallery-item-overlay {
       opacity: 1;
     }
 
@@ -854,7 +896,8 @@
     @media (max-width: 768px) {
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 200px);
+        grid-template-rows: repeat(3, 160px);
+        gap: 0.375rem;
       }
       .gallery-item:nth-child(1) {
         grid-column: span 2;
@@ -863,6 +906,9 @@
       .gallery-item:nth-child(4) {
         grid-column: span 1;
       }
+      .gallery-item-title { font-size: 1rem; }
+      .gallery-item-desc { font-size: 0.6875rem; }
+      .gallery-item-overlay { padding: 1rem; opacity: 1; }
     }
 
     /* ════════════════════════════════════════════
@@ -1043,7 +1089,7 @@
     /* ════════════════════════════════════════════
        FOOTER
     ════════════════════════════════════════════ */
-    .footer { background: var(--ink-soft); color: rgba(250,250,248,0.45); }
+    .footer { background: var(--ink-soft); color: rgba(250,250,248,0.65); }
 
     .footer-top {
       padding: 4rem 0 3rem;
@@ -1092,7 +1138,7 @@
 
     .footer-links a {
       font-size: 0.9rem;
-      color: rgba(250,250,248,0.4);
+      color: rgba(250,250,248,0.6);
       transition: color 200ms var(--ease);
     }
 
@@ -1134,8 +1180,8 @@
       flex-wrap: wrap;
     }
 
-    .footer-bottom a { color: var(--gold); }
-    .footer-bottom a:hover { color: var(--gold-light); }
+    .footer-bottom a { color: var(--gold-light); text-decoration: underline; }
+    .footer-bottom a:hover { color: var(--gold); }
 
     /* ════════════════════════════════════════════
        06 MOTION: scroll reveal - not AOS slop
@@ -1171,63 +1217,434 @@
     }
 
     /* ════════════════════════════════════════════
-       07 MOBILE - designed, not shrunk
+       07 MOBILE-NATIVE: Built for thumbs, not mice
     ════════════════════════════════════════════ */
     @media (max-width: 768px) {
-      .header .wrap { height: 72px; }
-      .logo img, .footer-logo img { height: 56px; }
-      .nav { display: none; flex-direction: column; align-items: stretch; }
-      .nav.open {
-        display: flex;
-        position: absolute;
-        top: 96px;
-        left: 0;
-        right: 0;
+      /* ── Header: hamburger + overlay nav ── */
+      .header .wrap { height: 64px; }
+      .logo img { height: 48px; }
+
+      .nav-toggle {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        color: var(--ink);
+        background: transparent;
+        border: none;
+        z-index: 102;
+      }
+      .nav-toggle svg { width: 24px; height: 24px; }
+
+      .nav {
+        position: fixed;
+        inset: 0;
+        z-index: 101;
         background: var(--paper);
-        border-bottom: 1px solid var(--border);
-        padding: 1rem var(--pad-x);
-        gap: 0.25rem;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+        transform: translateX(100%);
+        transition: transform 350ms cubic-bezier(0.32, 0.72, 0, 1);
+        padding: 2rem;
+      }
+      .nav.open { transform: translateX(0); }
+      .nav a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--ink);
+        padding: 0.75rem 1rem;
+      }
+      .nav a.nav-cta {
+        margin-left: 0;
+        background: var(--ink) !important;
+        color: var(--paper) !important;
+        padding: 0.875rem 2rem !important;
+        border-radius: 6px !important;
+        font-size: 1.125rem;
       }
 
-      .nav a { padding: 0.875rem 1rem; width: 100%; font-size: 0.875rem; }
-      .nav-cta { margin-left: 0 !important; }
-      .nav-toggle { display: block; }
+      /* ── Bottom Navigation Bar ── */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: var(--paper);
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 64px;
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+      }
+      .bottom-nav a {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        height: 100%;
+        color: var(--smoke);
+        font-size: 0.625rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        transition: color 150ms var(--ease);
+        position: relative;
+        min-width: 0;
+      }
+      .bottom-nav a svg {
+        width: 22px;
+        height: 22px;
+        stroke-width: 1.8;
+        flex-shrink: 0;
+      }
+      .bottom-nav a.active { color: var(--gold); }
+      .bottom-nav a.active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 24px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 0 0 3px 3px;
+      }
 
-      /* Hero: single column, text fills screen */
-      .hero { background-position: 15% top; background-size: auto 100%; }
-      .hero h1 { font-size: clamp(2rem, 7vw, 4.5rem); }
-      .hero-inner { padding-top: 72px; }
+      /* Add bottom padding to body so content isn't hidden behind nav */
+      body { padding-bottom: 64px; }
+
+      /* ── FAB WhatsApp ── */
+      .fab-wa {
+        position: fixed;
+        bottom: calc(64px + 16px + env(safe-area-inset-bottom, 0px));
+        right: 16px;
+        z-index: 999;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #25D366;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+        transition: transform 200ms var(--ease), box-shadow 200ms var(--ease);
+        animation: fabEntrance 500ms var(--ease-out) 800ms both;
+      }
+      .fab-wa:active { transform: scale(0.92); }
+      .fab-wa svg { width: 26px; height: 26px; }
+      @keyframes fabEntrance {
+        from { transform: scale(0) translateY(20px); opacity: 0; }
+        to   { transform: scale(1) translateY(0); opacity: 1; }
+      }
+
+      /* ── Hero: cinematic mobile ── */
+      .hero { background-position: 70% top; background-size: auto 115%; min-height: 100dvh; }
+      .hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.7) 100%);
+        z-index: 1;
+        pointer-events: none;
+      }
+      .hero-inner {
+        padding-top: 64px;
+        justify-content: flex-end;
+        padding-bottom: 120px;
+      }
+      .hero-eyebrow { font-size: 0.6875rem; margin-bottom: 1rem; }
+      .hero h1 { font-size: clamp(2.5rem, 12vw, 4rem); line-height: 0.9; margin-bottom: 1rem; }
+      .hero-body { max-width: 100%; }
+      .hero-desc { font-size: 1rem; line-height: 1.6; color: rgba(250,250,248,0.65); }
+      .hero-actions { margin-top: 1.5rem; flex-direction: column; gap: 0.625rem; }
+      .hero-actions .btn { width: 100%; justify-content: center; min-height: 52px; padding: 0.875rem; font-size: 0.9375rem; }
       .hero-scroll { display: none; }
 
-      /* About stacks vertically, visual goes last */
-      .about-grid { grid-template-columns: 1fr; }
-      .about-panel { aspect-ratio: 16 / 9; order: -1; }
-      .about-stats { grid-template-columns: 1fr 1fr 1fr; }
+      /* ── About: compact ── */
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .about-panel { aspect-ratio: 16 / 9; order: -1; border-radius: 8px; }
+      .about-stats {
+        display: flex;
+        overflow-x: auto;
+        gap: 0;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        margin-top: 1.5rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .about-stats::-webkit-scrollbar { display: none; }
+      .about-stat {
+        flex: 1 0 120px;
+        padding: 1.25rem 1rem;
+        border-right: 1px solid var(--border);
+        border-bottom: none;
+        text-align: center;
+      }
+      .about-stat:last-child { border-right: none; }
+      .about-stat-n { font-size: 2.25rem; }
+      .about-stat-l { font-size: 0.625rem; }
 
-      /* Athletes: 1 col */
-      .athletes-grid { grid-template-columns: 1fr; }
+      /* ── Athletes: Horizontal Carousel ── */
+      .athletes-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.75rem;
+        padding: 0.5rem var(--pad-x) 1.5rem;
+        margin: 0 calc(-1 * var(--pad-x));
+        scrollbar-width: none;
+      }
+      .athletes-grid::-webkit-scrollbar { display: none; }
+      .athlete-card {
+        flex: 0 0 78vw;
+        scroll-snap-align: center;
+        aspect-ratio: 3 / 4;
+        border-radius: 12px;
+        padding: 0 1.25rem 1.5rem;
+      }
+      .athlete-card .athlete-name { font-size: 1.75rem; margin-bottom: 0.5rem; }
+      .athlete-card .athlete-cta { font-size: 0.75rem; }
 
-      /* News: 1 col */
-      .news-grid { grid-template-columns: 1fr; }
+      /* Carousel dots */
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 0.5rem;
+      }
+      .carousel-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--border);
+        transition: background 200ms var(--ease), transform 200ms var(--ease);
+      }
+      .carousel-dot.active {
+        background: var(--gold);
+        transform: scale(1.3);
+      }
 
-      /* Services: 1 col */
-      .services-grid { grid-template-columns: 1fr; }
+      /* ── Services: Accordion ── */
+      .services-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        background: transparent;
+        border: none;
+        margin-top: 2rem;
+      }
+      .service-item {
+        padding: 1.25rem 0;
+        background: transparent;
+        border-bottom: 1px solid rgba(250,250,248,0.08);
+        cursor: pointer;
+      }
+      .service-item:first-child { border-top: 1px solid rgba(250,250,248,0.08); }
+      .service-item:hover { background: transparent; }
+      .service-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .service-icon {
+        width: 36px;
+        height: 36px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      .service-icon svg { width: 24px; height: 24px; }
+      .service-item h3 {
+        font-size: 1.125rem;
+        margin-bottom: 0;
+        flex: 1;
+      }
+      .service-chevron {
+        width: 20px;
+        height: 20px;
+        color: rgba(250,250,248,0.3);
+        transition: transform 250ms var(--ease);
+        flex-shrink: 0;
+      }
+      .service-item.expanded .service-chevron { transform: rotate(180deg); color: var(--gold); }
+      .service-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 300ms var(--ease), padding 300ms var(--ease);
+        padding-left: 52px;
+      }
+      .service-item.expanded .service-body {
+        max-height: 200px;
+        padding-top: 0.75rem;
+      }
+      .service-body p { font-size: 0.875rem; color: rgba(250,250,248,0.5); line-height: 1.65; }
 
-      /* Contact stacks */
-      .contact-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
+      /* ── Gallery: Horizontal swipe ── */
+      .gallery-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.75rem;
+        padding: 0.5rem var(--pad-x) 1rem;
+        margin: 0 calc(-1 * var(--pad-x));
+        scrollbar-width: none;
+      }
+      .gallery-grid::-webkit-scrollbar { display: none; }
+      .gallery-item {
+        flex: 0 0 85vw;
+        height: 60vw;
+        max-height: 340px;
+        scroll-snap-align: center;
+        border-radius: 12px;
+      }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4) { grid-column: auto; grid-row: auto; }
+      .gallery-item-overlay { opacity: 1; padding: 1.25rem; }
+      .gallery-item-title { font-size: 1.125rem; }
 
-      /* Footer: 2 col then 1 col */
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
-      .footer-brand { grid-column: 1 / -1; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      /* ── News: swipeable cards ── */
+      .news-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.75rem;
+        padding: 0.5rem var(--pad-x) 1rem;
+        margin: 0 calc(-1 * var(--pad-x));
+        margin-top: 1.5rem;
+        scrollbar-width: none;
+      }
+      .news-grid::-webkit-scrollbar { display: none; }
+      .news-card {
+        flex: 0 0 82vw;
+        scroll-snap-align: center;
+        padding: 1.5rem;
+        border-radius: 12px;
+      }
+      .news-card-title { font-size: 1.125rem; }
+      .news-card-body { font-size: 0.875rem; }
+
+      /* ── Contact: app-style ── */
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-info .section-title { margin-bottom: 0.5rem; }
+      .contact-intro { font-size: 0.9375rem; margin-bottom: 1.5rem; }
+      .contact-item { margin-bottom: 1rem; }
+      .contact-icon { width: 44px; height: 44px; }
+      .contact-item-val { font-size: 0.9375rem; }
+
+      .contact-form {
+        padding: 1.5rem;
+        border-radius: 12px;
+        background: var(--paper);
+        border: 1px solid var(--border);
+      }
+      .form-row { grid-template-columns: 1fr; gap: 0; }
+      .field { margin-bottom: 1rem; }
+      .field label { font-size: 0.6875rem; }
+      .field input, .field textarea {
+        min-height: 52px;
+        font-size: 16px;
+        padding: 0.875rem 1rem;
+        border-radius: 8px;
+      }
+      .field textarea { min-height: 100px; }
+      .btn-ink { width: 100%; justify-content: center; min-height: 52px; }
+
+      /* ── Modal: bottom sheet ── */
+      .athlete-modal-overlay {
+        padding: 0;
+        align-items: flex-end;
+        background: rgba(0,0,0,0.6);
+      }
+      .athlete-modal {
+        max-width: 100%;
+        max-height: 88dvh;
+        border-radius: 20px 20px 0 0;
+        grid-template-columns: 1fr;
+        transform: translateY(100%);
+        transition: transform 350ms cubic-bezier(0.32, 0.72, 0, 1);
+      }
+      .athlete-modal-overlay.open .athlete-modal { transform: translateY(0); }
+      .athlete-modal-photo { min-height: 240px; max-height: 35vh; border-radius: 20px 20px 0 0; }
+      .athlete-modal-photo::after { background: linear-gradient(to bottom, transparent 50%, var(--ink-soft) 100%); }
+      .athlete-modal-body { padding: 1.25rem; }
+      .athlete-modal-close {
+        top: 12px;
+        right: 12px;
+        width: 40px;
+        height: 40px;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(8px);
+      }
+      .athlete-modal-name { font-size: 1.75rem; }
+      .athlete-modal-bio { font-size: 0.875rem; }
+      .athlete-modal-stats { grid-template-columns: repeat(3, 1fr); }
+      .athlete-stat { padding: 0.875rem 0.25rem; }
+      .athlete-stat-value { font-size: 1.375rem; }
+      .athlete-stat-label { font-size: 0.625rem; }
+
+      /* Modal drag handle */
+      .modal-drag-handle {
+        width: 40px;
+        height: 4px;
+        background: rgba(250,250,248,0.25);
+        border-radius: 2px;
+        margin: 0.5rem auto;
+      }
+
+      /* ── Footer: minimal ── */
+      .footer { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+      .footer-top { display: none; }
+      .footer-bottom {
+        padding: 1rem 0;
+        flex-direction: column;
+        gap: 0.375rem;
+        text-align: center;
+        font-size: 0.75rem;
+        border: none;
+      }
+
+      /* ── General mobile ── */
+      .section { padding: 3rem 0; }
+      .section-title { font-size: clamp(1.75rem, 7vw, 2.25rem); margin-bottom: 1rem; }
+      .section-label { font-size: 0.625rem; margin-bottom: 0.875rem; }
+
+      /* Disable scroll reveal on mobile for instant content */
+      [data-reveal] { opacity: 1; transform: none; transition: none; }
+
+      /* Reduce motion for battery */
+      .athlete-card, .gallery-item, .news-card { transition: none; }
     }
 
     @media (max-width: 480px) {
-      .about-stats { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr; }
-      .athletes-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero-inner { padding-bottom: 100px; }
+      .athlete-card { flex: 0 0 82vw; }
+      .about-stat { flex: 1 0 100px; }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .athlete-card { flex: 0 0 55vw; }
+      .gallery-item { flex: 0 0 55vw; height: 42vw; }
+      .news-card { flex: 0 0 55vw; }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -1275,6 +1692,9 @@
       </button>
     </div>
   </header>
+
+  <!-- ════ MAIN CONTENT ════ -->
+  <main id="main">
 
   <!-- ════ HERO ════ -->
   <section class="hero" aria-label="Início">
@@ -1377,39 +1797,39 @@
         </div>
       </div>
 
-      <div class="athletes-grid" role="list">
+      <div class="athletes-grid">
 
-        <article class="athlete-card" role="listitem" data-reveal data-delay="1" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/atacante.jpeg');" onclick="openModal('modal-lucas')">
+        <article class="athlete-card" data-reveal data-delay="1" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/atacante.jpeg');" onclick="openModal('modal-lucas')">
           <div class="athlete-position">Atacante</div>
           <div class="athlete-name">Lucas Oliveira</div>
           <div class="athlete-cta">Ver ficha <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
         </article>
 
-        <article class="athlete-card" role="listitem" data-reveal data-delay="2" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/meia.jpg');" onclick="openModal('modal-gabriel')">
+        <article class="athlete-card" data-reveal data-delay="2" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/meia.jpg');" onclick="openModal('modal-gabriel')">
           <div class="athlete-position">Meio Campo</div>
           <div class="athlete-name">Gabriel Santos</div>
           <div class="athlete-cta">Ver ficha <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
         </article>
 
-        <article class="athlete-card" role="listitem" data-reveal data-delay="3" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/zagueiro.jpeg');" onclick="openModal('modal-pedro')">
+        <article class="athlete-card" data-reveal data-delay="3" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/zagueiro.jpeg');" onclick="openModal('modal-pedro')">
           <div class="athlete-position">Zagueiro</div>
           <div class="athlete-name">Pedro Costa</div>
           <div class="athlete-cta">Ver ficha <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
         </article>
 
-        <article class="athlete-card" role="listitem" data-reveal data-delay="1" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/goleiro.jpeg');" onclick="openModal('modal-felipe')">
+        <article class="athlete-card" data-reveal data-delay="1" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/goleiro.jpeg');" onclick="openModal('modal-felipe')">
           <div class="athlete-position">Goleiro</div>
           <div class="athlete-name">Felipe Almeida</div>
           <div class="athlete-cta">Ver ficha <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
         </article>
 
-        <article class="athlete-card" role="listitem" data-reveal data-delay="2" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/volante.jpeg');" onclick="openModal('modal-rafael')">
+        <article class="athlete-card" data-reveal data-delay="2" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/volante.jpeg');" onclick="openModal('modal-rafael')">
           <div class="athlete-position">Volante</div>
           <div class="athlete-name">Rafael Lima</div>
           <div class="athlete-cta">Ver ficha <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
         </article>
 
-        <article class="athlete-card" role="listitem" data-reveal data-delay="3" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/ponta.jpeg');" onclick="openModal('modal-matheus')">
+        <article class="athlete-card" data-reveal data-delay="3" style="background-image:linear-gradient(180deg,rgba(10,10,10,0.2) 0%,rgba(10,10,10,0.85) 70%,#0A0A0A 100%),url('images/ponta.jpeg');" onclick="openModal('modal-matheus')">
           <div class="athlete-position">Extremo</div>
           <div class="athlete-name">Matheus Ribeiro</div>
           <div class="athlete-cta">Ver ficha <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
@@ -1429,6 +1849,7 @@
       </button>
       <div class="athlete-modal-photo" style="background-image:url('images/atacante.jpeg');"></div>
       <div class="athlete-modal-body">
+        <div class="modal-drag-handle" aria-hidden="true"></div>
         <div class="athlete-modal-name">Lucas Oliveira</div>
         <div class="athlete-modal-position">Atacante</div>
         <div class="athlete-modal-bio">Atacante veloz e finalizador, conhecido por sua movimentação inteligente e faro de gol. Destacou-se nas categorias de base do São Paulo e hoje é referência no elenco profissional.</div>
@@ -1470,6 +1891,7 @@
       </button>
       <div class="athlete-modal-photo" style="background-image:url('images/meia.jpg');"></div>
       <div class="athlete-modal-body">
+        <div class="modal-drag-handle" aria-hidden="true"></div>
         <div class="athlete-modal-name">Gabriel Santos</div>
         <div class="athlete-modal-position">Meio Campo</div>
         <div class="athlete-modal-bio">Meio-campista criativo com excelente visão de jogo e passes precisos. Um dos principais armadores do campeonato, com grande capacidade de ditar o ritmo das partidas.</div>
@@ -1511,6 +1933,7 @@
       </button>
       <div class="athlete-modal-photo" style="background-image:url('images/zagueiro.jpeg');"></div>
       <div class="athlete-modal-body">
+        <div class="modal-drag-handle" aria-hidden="true"></div>
         <div class="athlete-modal-name">Pedro Costa</div>
         <div class="athlete-modal-position">Zagueiro</div>
         <div class="athlete-modal-bio">Zagueiro de granito, excelente nos desarmes e muito forte no jogo aéreo. Líder nato da defesa, com ótima capacidade de organizar a linha defensiva.</div>
@@ -1552,6 +1975,7 @@
       </button>
       <div class="athlete-modal-photo" style="background-image:url('images/goleiro.jpeg');"></div>
       <div class="athlete-modal-body">
+        <div class="modal-drag-handle" aria-hidden="true"></div>
         <div class="athlete-modal-name">Felipe Almeida</div>
         <div class="athlete-modal-position">Goleiro</div>
         <div class="athlete-modal-bio">Goleiro experiente e de reflexos rápidos, com grande capacidade de defesa em um contra um. Referência no vestiário e líder indiscutível da equipe.</div>
@@ -1593,6 +2017,7 @@
       </button>
       <div class="athlete-modal-photo" style="background-image:url('images/volante.jpeg');"></div>
       <div class="athlete-modal-body">
+        <div class="modal-drag-handle" aria-hidden="true"></div>
         <div class="athlete-modal-name">Rafael Lima</div>
         <div class="athlete-modal-position">Volante</div>
         <div class="athlete-modal-bio">Volante box-to-box com enorme resistência física e qualidade no passe. Destaca-se pela capacidade de recuperar bolas e iniciar jogadas de ataque.</div>
@@ -1634,6 +2059,7 @@
       </button>
       <div class="athlete-modal-photo" style="background-image:url('images/ponta.jpeg');"></div>
       <div class="athlete-modal-body">
+        <div class="modal-drag-handle" aria-hidden="true"></div>
         <div class="athlete-modal-name">Matheus Ribeiro</div>
         <div class="athlete-modal-position">Extremo</div>
         <div class="athlete-modal-bio">Extremo driblador e veloz, com grande capacidade de ultrapassar defesas e criar oportunidades. Um dos jovens talentos mais promissores do futebol brasileiro.</div>
@@ -1677,54 +2103,85 @@
 
       <div class="services-grid">
 
-        <div class="service-item" data-reveal data-delay="1">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="service-item" data-reveal data-delay="1" onclick="toggleService(this)">
+          <div class="service-header">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Gestão de Carreira</h3>
+            <svg class="service-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <h3>Gestão de Carreira</h3>
-          <p>Planejamento estratégico de transferências, renovações e empréstimos. Definimos a trajetória ideal em clubes nacionais e internacionais.</p>
+          <div class="service-body">
+            <p>Planejamento estratégico de transferências, renovações e empréstimos. Definimos a trajetória ideal em clubes nacionais e internacionais.</p>
+          </div>
         </div>
 
-        <div class="service-item" data-reveal data-delay="2">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        <div class="service-item" data-reveal data-delay="2" onclick="toggleService(this)">
+          <div class="service-header">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+            </div>
+            <h3>Consultoria Financeira</h3>
+            <svg class="service-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <h3>Consultoria Financeira</h3>
-          <p>Gestão patrimonial, planejamento tributário, investimentos e previdência para garantir segurança financeira durante e após a carreira.</p>
+          <div class="service-body">
+            <p>Gestão patrimonial, planejamento tributário, investimentos e previdência para garantir segurança financeira durante e após a carreira.</p>
+          </div>
         </div>
 
-        <div class="service-item" data-reveal data-delay="3">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 8 14 2 16 7 20 9 9 18 7 14"/><path d="M14 2l4 4 4-4"/><path d="M18.5 3.5l4 4"/><path d="M12 20l-5 2 1-5"/></svg>
+        <div class="service-item" data-reveal data-delay="3" onclick="toggleService(this)">
+          <div class="service-header">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 8 14 2 16 7 20 9 9 18 7 14"/><path d="M14 2l4 4 4-4"/><path d="M18.5 3.5l4 4"/><path d="M12 20l-5 2 1-5"/></svg>
+            </div>
+            <h3>Marketing e Imagem</h3>
+            <svg class="service-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <h3>Marketing e Imagem</h3>
-          <p>Construção de marca pessoal, gestão de redes sociais, relações públicas e parcerias comerciais para maximizar o valor do atleta.</p>
+          <div class="service-body">
+            <p>Construção de marca pessoal, gestão de redes sociais, relações públicas e parcerias comerciais para maximizar o valor do atleta.</p>
+          </div>
         </div>
 
-        <div class="service-item" data-reveal data-delay="1">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="service-item" data-reveal data-delay="1" onclick="toggleService(this)">
+          <div class="service-header">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Assessoria Jurídica</h3>
+            <svg class="service-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <h3>Assessoria Jurídica</h3>
-          <p>Suporte em direito desportivo: contratos, litígios, direito de imagem, questões trabalhistas e procedimentos emigratórios.</p>
+          <div class="service-body">
+            <p>Suporte em direito desportivo: contratos, litígios, direito de imagem, questões trabalhistas e procedimentos emigratórios.</p>
+          </div>
         </div>
 
-        <div class="service-item" data-reveal data-delay="2">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="service-item" data-reveal data-delay="2" onclick="toggleService(this)">
+          <div class="service-header">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3>Scouting e Captação</h3>
+            <svg class="service-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <h3>Scouting e Captação</h3>
-          <p>Rede de olheiros e análise de desempenho para identificar jovens talentos e conectar jovens talentos a clubes no Brasil e no exterior.</p>
+          <div class="service-body">
+            <p>Rede de olheiros e análise de desempenho para identificar jovens talentos e conectar jovens talentos a clubes no Brasil e no exterior.</p>
+          </div>
         </div>
 
-        <div class="service-item" data-reveal data-delay="3">
-          <div class="service-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <div class="service-item" data-reveal data-delay="3" onclick="toggleService(this)">
+          <div class="service-header">
+            <div class="service-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <h3>Carreira Internacional</h3>
+            <svg class="service-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
           </div>
-          <h3>Carreira Internacional</h3>
-          <p>Consultoria para transferências internacionais, adaptação cultural, vistos e conexão com clubes na Europa, Ásia e Américas.</p>
+          <div class="service-body">
+            <p>Consultoria para transferências internacionais, adaptação cultural, vistos e conexão com clubes na Europa, Ásia e Américas.</p>
+          </div>
         </div>
 
+        <div class="carousel-dots" id="athletes-dots"></div>
       </div>
     </div>
   </section>
@@ -1737,8 +2194,8 @@
         Galeria <span style="color:var(--gold)">de Fotos</span>
       </h2>
 
-      <div class="gallery-grid" role="list">
-        <div class="gallery-item" role="listitem" data-reveal data-delay="1" style="background-image:url('images/atacante.jpeg');">
+      <div class="gallery-grid">
+        <div class="gallery-item" data-reveal data-delay="1" style="background-image:url('images/atacante.jpeg');">
           <div class="gallery-item-overlay">
             <div>
               <div class="gallery-item-title">Lucas Oliveira</div>
@@ -1746,7 +2203,7 @@
             </div>
           </div>
         </div>
-        <div class="gallery-item" role="listitem" data-reveal data-delay="2" style="background-image:url('images/meia.jpg');">
+        <div class="gallery-item" data-reveal data-delay="2" style="background-image:url('images/meia.jpg');">
           <div class="gallery-item-overlay">
             <div>
               <div class="gallery-item-title">Gabriel Santos</div>
@@ -1754,7 +2211,7 @@
             </div>
           </div>
         </div>
-        <div class="gallery-item" role="listitem" data-reveal data-delay="3" style="background-image:url('images/zagueiro.jpeg');">
+        <div class="gallery-item" data-reveal data-delay="3" style="background-image:url('images/zagueiro.jpeg');">
           <div class="gallery-item-overlay">
             <div>
               <div class="gallery-item-title">Pedro Costa</div>
@@ -1762,7 +2219,7 @@
             </div>
           </div>
         </div>
-        <div class="gallery-item" role="listitem" data-reveal data-delay="1" style="background-image:url('images/goleiro.jpeg');">
+        <div class="gallery-item" data-reveal data-delay="1" style="background-image:url('images/goleiro.jpeg');">
           <div class="gallery-item-overlay">
             <div>
               <div class="gallery-item-title">Felipe Almeida</div>
@@ -1770,7 +2227,7 @@
             </div>
           </div>
         </div>
-        <div class="gallery-item" role="listitem" data-reveal data-delay="2" style="background-image:url('images/volante.jpeg');">
+        <div class="gallery-item" data-reveal data-delay="2" style="background-image:url('images/volante.jpeg');">
           <div class="gallery-item-overlay">
             <div>
               <div class="gallery-item-title">Rafael Lima</div>
@@ -1778,6 +2235,7 @@
             </div>
           </div>
         </div>
+        <div class="carousel-dots" id="gallery-dots"></div>
       </div>
     </div>
   </section>
@@ -1814,6 +2272,7 @@
         </article>
 
       </div>
+        <div class="carousel-dots" id="news-dots"></div>
     </div>
   </section>
 
@@ -1841,7 +2300,7 @@
             </div>
           </div>
 
-          <a href="https://wa.me/5511999998888" target="_blank" rel="noopener noreferrer" class="contact-item contact-wa" aria-label="Fale conosco pelo WhatsApp">
+          <a href="https://wa.me/5511999998888" target="_blank" rel="noopener noreferrer" class="contact-item contact-wa">
             <div class="contact-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </div>
@@ -1892,6 +2351,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ════ FOOTER ════ -->
   <footer class="footer" role="contentinfo">
@@ -1960,35 +2421,39 @@
       var nav = document.getElementById('main-nav');
       var open = nav.classList.toggle('open');
       btn.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
       btn.innerHTML = open
         ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
         : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
     }
 
+    function closeNav() {
+      var nav = document.getElementById('main-nav');
+      var btn = document.querySelector('.nav-toggle');
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
+    }
+
     /* Close nav when link clicked */
     document.querySelectorAll('#main-nav a').forEach(function(a) {
       a.addEventListener('click', function() {
-        var nav = document.getElementById('main-nav');
-        var btn = document.querySelector('.nav-toggle');
-        nav.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
-        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
+        closeNav();
       });
     });
 
     /* Escape key closes nav */
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        var nav = document.getElementById('main-nav');
-        nav.classList.remove('open');
-        document.querySelector('.nav-toggle').setAttribute('aria-expanded', 'false');
+        closeNav();
       }
     });
 
     /* Close on resize */
     window.addEventListener('resize', function() {
       if (window.innerWidth > 768) {
-        document.getElementById('main-nav').classList.remove('open');
+        closeNav();
       }
     });
 
@@ -2011,35 +2476,40 @@
     /* ── Header slide-up on scroll ── */
     var headerEl = document.querySelector('.header');
     var headerH = headerEl.offsetHeight;
+    var lastScrollY = 0;
 
     function updateHeader() {
       var scrollY = window.scrollY || window.pageYOffset;
-      var translate = Math.min(scrollY, headerH);
-      headerEl.style.transform = 'translateY(-' + translate + 'px)';
-      requestAnimationFrame(updateHeader);
+      if (scrollY !== lastScrollY) {
+        lastScrollY = scrollY;
+        var translate = Math.min(scrollY, headerH);
+        headerEl.style.transform = 'translateY(-' + translate + 'px)';
+      }
     }
-    requestAnimationFrame(updateHeader);
+    window.addEventListener('scroll', updateHeader, { passive: true });
 
     /* ── Hero parallax (player rises on scroll) ── */
     var hero = document.querySelector('.hero');
     if (hero) {
-      // Start position: image shifted down (100px), so it has room to rise
       var baseOffset = -30;
       var parallaxSpeed = 0.35;
+      var supportsHover = window.matchMedia('(hover: hover)').matches;
       
       function updateParallax() {
         var scrolled = window.scrollY;
-        // As user scrolls down, image moves up (subtract from base offset)
         var yPos = baseOffset - (scrolled * parallaxSpeed);
         var isMobile = window.innerWidth <= 768;
         
         hero.style.backgroundPositionX = isMobile ? '15%' : 'right -100px';
         hero.style.backgroundPositionY = 'top ' + yPos + 'px';
-        
-        requestAnimationFrame(updateParallax);
       }
       
-      requestAnimationFrame(updateParallax);
+      // Only run parallax on desktop; mobile gets static background for performance
+      if (!supportsHover || window.innerWidth > 768) {
+        window.addEventListener('scroll', updateParallax, { passive: true });
+      } else {
+        hero.style.backgroundPosition = '15% top';
+      }
     }
 
     /* ── Modal functions ── */
@@ -2079,8 +2549,130 @@
       });
     });
 
-    /* ── 06 Motion: purposeful scroll reveal ── */
-    if ('IntersectionObserver' in window) {
+    /* ── Touch feedback for cards & gallery ── */
+    function addTouchFeedback(selector) {
+      document.querySelectorAll(selector).forEach(function(el) {
+        el.addEventListener('touchstart', function() { this.classList.add('touched'); }, {passive: true});
+        el.addEventListener('touchend', function() {
+          var self = this;
+          setTimeout(function() { self.classList.remove('touched'); }, 400);
+        });
+      });
+    }
+    addTouchFeedback('.athlete-card');
+    addTouchFeedback('.gallery-item');
+    addTouchFeedback('.service-item');
+    addTouchFeedback('.news-card');
+
+    /* ── Gallery: show overlay on mobile by default ── */
+    if (window.matchMedia('(hover: none)').matches) {
+      document.querySelectorAll('.gallery-item .gallery-item-overlay').forEach(function(overlay) {
+        overlay.style.opacity = '1';
+      });
+    }
+
+    /* ════════════════════════════════════════════
+       MOBILE-NATIVE JS
+    ════════════════════════════════════════════ */
+    var isMobile = window.innerWidth <= 768;
+    var supportsHover = window.matchMedia('(hover: hover)').matches;
+
+    /* ── Bottom Nav Active State ── */
+    function updateBottomNav() {
+      var navLinks = document.querySelectorAll('.bottom-nav a');
+      var sections = ['top', 'sobre', 'atletas', 'servicos', 'galeria', 'noticias', 'contato'];
+      var scrollPos = window.scrollY + 100;
+      var active = 'top';
+
+      sections.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollPos) active = id;
+      });
+
+      navLinks.forEach(function(link) {
+        link.classList.toggle('active', link.dataset.section === active);
+      });
+    }
+    if (isMobile || !supportsHover) {
+      window.addEventListener('scroll', updateBottomNav, { passive: true });
+      updateBottomNav();
+    }
+
+    /* ── Carousel Dots ── */
+    function setupCarouselDots(containerId, dotsId) {
+      var container = document.querySelector(containerId);
+      var dotsContainer = document.getElementById(dotsId);
+      if (!container || !dotsContainer) return;
+
+      var items = container.children;
+      var total = items.length;
+      if (total <= 1) { dotsContainer.style.display = 'none'; return; }
+
+      // Create dots
+      for (var i = 0; i < total; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', (function(idx) {
+          return function() {
+            items[idx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          };
+        })(i));
+        dotsContainer.appendChild(dot);
+      }
+
+      // Update active dot on scroll
+      var updateDots = function() {
+        var scrollLeft = container.scrollLeft;
+        var itemWidth = items[0].offsetWidth + parseInt(getComputedStyle(container).gap || 12);
+        var idx = Math.round(scrollLeft / itemWidth);
+        idx = Math.max(0, Math.min(idx, total - 1));
+        dotsContainer.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+          d.classList.toggle('active', i === idx);
+        });
+      };
+      container.addEventListener('scroll', updateDots, { passive: true });
+    }
+
+    if (isMobile || !supportsHover) {
+      setupCarouselDots('.athletes-grid', 'athletes-dots');
+      setupCarouselDots('.gallery-grid', 'gallery-dots');
+      setupCarouselDots('.news-grid', 'news-dots');
+    }
+
+    /* ── Accordion Services ── */
+    window.toggleService = function(item) {
+      var isExpanded = item.classList.contains('expanded');
+      // Close all
+      document.querySelectorAll('.service-item').forEach(function(el) {
+        el.classList.remove('expanded');
+      });
+      // Open clicked if it was closed
+      if (!isExpanded) item.classList.add('expanded');
+    };
+
+    /* ── Modal Swipe-to-dismiss ── */
+    document.querySelectorAll('.athlete-modal-overlay').forEach(function(overlay) {
+      var startY = 0, startX = 0;
+      overlay.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].clientY;
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      overlay.addEventListener('touchend', function(e) {
+        var endY = e.changedTouches[0].clientY;
+        var endX = e.changedTouches[0].clientX;
+        var diffY = endY - startY;
+        var diffX = Math.abs(endX - startX);
+        // Swipe down > 60px with minimal horizontal movement
+        if (diffY > 60 && diffX < 50) {
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      }, { passive: true });
+    });
+
+    /* ── Scroll Reveal (desktop only) ── */
+    if ('IntersectionObserver' in window && (window.innerWidth > 768 || supportsHover)) {
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (entry.isIntersecting) {
@@ -2099,6 +2691,35 @@
       });
     }
   </script>
+
+  <!-- ════ MOBILE-NATIVE: Bottom Navigation Bar ════ -->
+  <nav class="bottom-nav" aria-label="Navegação principal" id="bottom-nav">
+    <a href="#top" data-section="top" class="active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Início
+    </a>
+    <a href="#atletas" data-section="atletas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Atletas
+    </a>
+    <a href="#servicos" data-section="servicos">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      Serviços
+    </a>
+    <a href="#noticias" data-section="noticias">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Notícias
+    </a>
+    <a href="#contato" data-section="contato">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Contato
+    </a>
+  </nav>
+
+  <!-- ════ FAB WhatsApp ════ -->
+  <a href="https://wa.me/5511999998888" target="_blank" rel="noopener noreferrer" class="fab-wa" aria-label="Fale conosco pelo WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 
 </body>
 </html>
