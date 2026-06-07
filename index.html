@@ -1271,6 +1271,57 @@
     }
 
     /* ════════════════════════════════════════════
+       BACK TO TOP
+    ════════════════════════════════════════════ */
+    .btt {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 99;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 250ms var(--ease), transform 250ms var(--ease), background 200ms var(--ease);
+      box-shadow: 0 4px 16px rgba(196,74,124,0.3);
+    }
+
+    .btt.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .btt:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(196,74,124,0.4);
+    }
+
+    .btt svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2.5;
+    }
+
+    @media (max-width: 768px) {
+      .btt {
+        bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* ════════════════════════════════════════════
        07 MOBILE-NATIVE: Built for thumbs, not mice
     ════════════════════════════════════════════ */
     @media (max-width: 768px) {
@@ -2702,6 +2753,13 @@
         el.classList.add('in');
       });
     }
+
+    /* ── Back to top visibility ── */
+    var btt = document.getElementById('btt');
+    function toggleBtt() {
+      btt.classList.toggle('visible', window.scrollY > 400);
+    }
+    window.addEventListener('scroll', toggleBtt, { passive: true });
   </script>
 
   <!-- ════ MOBILE-NATIVE: Bottom Navigation Bar ════ -->
@@ -2728,7 +2786,10 @@
     </a>
   </nav>
 
-  <!-- WhatsApp FAB removed -->
+  <!-- Back to top -->
+  <button class="btt" id="btt" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
 
 </body>
 </html>
