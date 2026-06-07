@@ -74,8 +74,8 @@
       position: fixed;
       inset: 0 0 auto;
       z-index: 100;
-      background: var(--paper);
-      border-bottom: 1px solid var(--border);
+      background: var(--ink);
+      border-bottom: 1px solid var(--border-inv);
       overflow: hidden;
       transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       will-change: transform;
@@ -99,8 +99,9 @@
       height: 80px;
       width: auto;
       object-fit: contain;
-      /* mix-blend-mode: multiply removes the white JPEG bg on light surfaces */
-      mix-blend-mode: multiply;
+      /* Invert black logo to white on dark header */
+      filter: invert(1);
+      mix-blend-mode: normal !important;
     }
 
     /* ── Nav ── */
@@ -112,12 +113,12 @@
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--ink-mid);
+      color: rgba(250,250,248,0.65);
       border-radius: 6px;
       transition: color 200ms var(--ease), background 200ms var(--ease);
     }
 
-    .nav a:hover { color: var(--gold); }
+    .nav a:hover { color: var(--gold-light); }
 
     .nav a:focus-visible {
       outline: 2px solid var(--gold);
@@ -141,7 +142,7 @@
       display: none;
       padding: 0.5rem;
       border-radius: 6px;
-      color: var(--ink);
+      color: var(--paper);
     }
 
     .nav-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
@@ -1220,8 +1221,18 @@
        07 MOBILE-NATIVE: Built for thumbs, not mice
     ════════════════════════════════════════════ */
     @media (max-width: 768px) {
-      /* ── Header: minimal, no hamburger ── */
-      .header .wrap { height: 64px; }
+      /* ── Header: transparent, logo only ── */
+      .header {
+        background: transparent !important;
+        border-bottom: none !important;
+        position: absolute !important;
+        transform: none !important;
+      }
+      .header .wrap {
+        height: auto;
+        padding-top: 1rem;
+        justify-content: flex-start;
+      }
       .logo img { height: 48px; }
       .nav, .nav-toggle { display: none !important; }
 
@@ -1306,31 +1317,34 @@
       }
 
       /* ── Hero: cinematic mobile ── */
-      .hero { background-position: 70% top; background-size: auto 115%; min-height: 100dvh; }
+      .hero { background-position: right -300px top -80px; background-size: auto 125%; min-height: 100dvh; }
       .hero::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 30%, rgba(0,0,0,0.7) 100%);
+        background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 25%, rgba(0,0,0,0.85) 100%);
         z-index: 1;
         pointer-events: none;
       }
       .hero-inner {
-        padding-top: 64px;
+        padding-top: 100px;
         justify-content: flex-end;
-        padding-bottom: 120px;
+        padding-bottom: 140px;
       }
-      .hero-eyebrow { font-size: 0.6875rem; margin-bottom: 1rem; }
-      .hero h1 { font-size: clamp(2.5rem, 12vw, 4rem); line-height: 0.9; margin-bottom: 1rem; }
+      .hero-eyebrow { font-size: 0.75rem; margin-bottom: 1.25rem; letter-spacing: 0.16em; }
+      .hero h1 { font-size: clamp(3.5rem, 14vw, 5.5rem); line-height: 0.88; margin-bottom: 1.25rem; white-space: nowrap; }
+      .hero h1 .accent { display: inline; }
       .hero-body { max-width: 100%; }
-      .hero-desc { font-size: 1rem; line-height: 1.6; color: rgba(250,250,248,0.65); }
-      .hero-actions { margin-top: 1.5rem; flex-direction: column; gap: 0.625rem; }
-      .hero-actions .btn { width: 100%; justify-content: center; min-height: 52px; padding: 0.875rem; font-size: 0.9375rem; }
+      .hero-desc { font-size: 1.0625rem; line-height: 1.65; color: rgba(250,250,248,0.75); }
+      .hero-actions { margin-top: 2rem; flex-direction: column; gap: 0.75rem; }
+      .hero-actions .btn { width: 100%; justify-content: center; min-height: 56px; padding: 1rem; font-size: 1rem; letter-spacing: 0.06em; }
       .hero-scroll { display: none; }
 
       /* ── About: compact ── */
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .about-panel { aspect-ratio: 16 / 9; order: -1; border-radius: 8px; }
+      .about-panel { aspect-ratio: 21 / 9; order: -1; border-radius: 8px; }
+      .about-panel-inner { padding: 1rem; }
+      .pitch-svg { transform: rotate(90deg) scale(1.2); }
       .about-stats {
         display: flex;
         overflow-x: auto;
@@ -2460,10 +2474,11 @@
       }
       
       // Only run parallax on desktop; mobile gets static background for performance
-      if (!supportsHover || window.innerWidth > 768) {
+      if (window.innerWidth > 768) {
         window.addEventListener('scroll', updateParallax, { passive: true });
       } else {
-        hero.style.backgroundPosition = '15% top';
+        hero.style.backgroundPosition = 'right -300px top -80px';
+        hero.style.backgroundAttachment = 'scroll';
       }
     }
 
