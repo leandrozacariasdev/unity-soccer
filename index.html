@@ -437,7 +437,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2.5rem;
+      padding: 3.5rem;
     }
 
     /* Pitch graphic */
@@ -1294,7 +1294,7 @@
       /* ── FAB WhatsApp removed ── */
 
       /* ── Hero: cinematic mobile ── */
-      .hero { background-position: right -300px top -80px; background-size: auto 125%; min-height: calc(100dvh - 64px) !important; height: calc(100dvh - 64px) !important; padding-bottom: 0; }
+      .hero { background-position: right -300px top -130px; background-size: auto 125%; min-height: calc(100dvh - 64px) !important; height: calc(100dvh - 64px) !important; padding-bottom: 0; }
       .hero::after {
         content: '';
         position: absolute;
@@ -1321,8 +1321,8 @@
       /* ── About: compact ── */
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
       .about-panel { aspect-ratio: 21 / 9; order: -1; border-radius: 8px; }
-      .about-panel-inner { padding: 1rem; }
-      .pitch-svg { transform: rotate(90deg) scale(1.2); }
+      .about-panel-inner { padding: 2rem; }
+      .pitch-svg { transform: rotate(90deg) scale(1.1); }
       .about-stats {
         display: flex;
         overflow-x: auto;
@@ -1363,7 +1363,7 @@
         scroll-snap-align: center;
         aspect-ratio: 3 / 4;
         border-radius: 12px;
-        padding: 0 1.25rem 1.5rem;
+        padding: 0 1.25rem 2.5rem;
       }
       .athlete-card .athlete-name { font-size: 1.75rem; margin-bottom: 0.5rem; }
       .athlete-card .athlete-cta { font-size: 0.75rem; }
@@ -1713,18 +1713,21 @@
 
         <div class="about-panel" data-reveal="right" aria-hidden="true">
           <div class="about-panel-inner">
-            <svg class="pitch-svg" viewBox="0 0 400 500" fill="none" stroke="currentColor" stroke-width="5">
-              <rect x="20" y="20" width="360" height="460" rx="2"/>
-              <line x1="20" y1="250" x2="380" y2="250"/>
-              <circle cx="200" cy="250" r="50"/>
-              <circle cx="200" cy="250" r="4" fill="currentColor"/>
-              <rect x="120" y="20" width="160" height="80"/>
-              <rect x="120" y="400" width="160" height="80"/>
-              <rect x="160" y="20" width="80" height="40"/>
-              <rect x="160" y="440" width="80" height="40"/>
+            <svg class="pitch-svg" viewBox="0 0 600 740" fill="none" stroke="currentColor" stroke-width="3.5">
+              <rect x="80" y="80" width="440" height="580" rx="4"/>
+              <line x1="80" y1="370" x2="520" y2="370"/>
+              <circle cx="300" cy="370" r="65"/>
+              <circle cx="300" cy="370" r="4" fill="currentColor"/>
+              <rect x="200" y="80" width="200" height="110"/>
+              <rect x="200" y="550" width="200" height="110"/>
+              <rect x="250" y="80" width="100" height="60"/>
+              <rect x="250" y="600" width="100" height="60"/>
+              <path d="M 80 140 A 60 60 0 0 1 140 80"/>
+              <path d="M 520 140 A 60 60 0 0 0 460 80"/>
+              <path d="M 80 600 A 60 60 0 0 0 140 660"/>
+              <path d="M 520 600 A 60 60 0 0 1 460 660"/>
             </svg>
           </div>
-          <div class="about-panel-label">Unity Soccer · Est. 2014</div>
           <div class="about-panel-gold"></div>
         </div>
 
