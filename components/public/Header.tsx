@@ -123,12 +123,12 @@ function Logo() {
     <div ref={ref} className="relative inline-block">
       <Image
         data-logo
-        src="/images/logo-spin.jpeg"
+        src="/images/logo-spin-transparent.png"
         alt="Unity Soccer"
         width={200}
         height={80}
         priority
-        className="h-20 w-auto invert"
+        className="h-20 w-auto"
         style={{ opacity: ready ? 1 : 0 }}
       />
       <Image
