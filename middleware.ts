@@ -1,5 +1,4 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { createServerClient, type CookieOptions } from '@supabase/ssr';
 
 export async function middleware(request: NextRequest) {
   // Apenas rotas /admin/* (exceto /admin/login)
@@ -11,43 +10,22 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  let response = NextResponse.next({
-    request: { headers: request.headers },
-  });
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
-        setAll(cookiesToSet: { name: string; value: string; options: CookieOptions }[]) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value),
-          );
-          response = NextResponse.next({
-            request,
-          });
-          cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options),
-          );
-        },
-      },
-    },
+  // Verifica se há cookie de sessão do Supabase
+  // Os cookies do Supabase Auth têm nomes que começam com "sb-" + projectRef + "-auth-token"
+  // Verificamos se QUALQUER cookie de auth existe
+  const cookies = request.cookies.getAll();
+  const hasAuthCookie = cookies.some(
+    (c) => c.name.includes('-auth-token') || c.name.startsWith('sb-'),
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
+  if (!hasAuthCookie) {
     const url = request.nextUrl.clone();
     url.pathname = '/admin/login';
     url.searchParams.set('redirect', request.nextUrl.pathname);
     return NextResponse.redirect(url);
   }
 
-  return response;
+  return NextResponse.next();
 }
 
 export const config = {
