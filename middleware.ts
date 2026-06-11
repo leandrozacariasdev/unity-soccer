@@ -1,9 +1,16 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  // Apenas rotas /admin/* (exceto /admin/login)
+  // Apenas rotas /admin/*
   if (!request.nextUrl.pathname.startsWith('/admin')) {
     return NextResponse.next();
+  }
+
+  // /admin → /admin/dashboard
+  if (request.nextUrl.pathname === '/admin' || request.nextUrl.pathname === '/admin/') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/admin/dashboard';
+    return NextResponse.redirect(url);
   }
 
   if (request.nextUrl.pathname === '/admin/login') {

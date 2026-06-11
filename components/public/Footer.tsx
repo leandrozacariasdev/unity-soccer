@@ -58,9 +58,9 @@ export async function Footer() {
             <ul className="flex flex-col gap-3">
               {[
                 ['A Empresa', '/#sobre'],
-                ['Atletas', '/atletas'],
-                ['Galeria', '/galeria'],
-                ['Notícias', '/noticias'],
+                ['Atletas', '/#atletas'],
+                ['Galeria', '/#galeria'],
+                ['Notícias', '/#noticias'],
                 ['Contato', '/#contato'],
               ].map(([label, href]) => (
                 <li key={href}>

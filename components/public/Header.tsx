@@ -5,32 +5,18 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 const navItems = [
   { href: '/#sobre', label: 'A Empresa' },
-  { href: '/atletas', label: 'Atletas' },
-  { href: '/galeria', label: 'Galeria' },
-  { href: '/noticias', label: 'Notícias' },
+  { href: '/#atletas', label: 'Atletas' },
+  { href: '/#galeria', label: 'Galeria' },
+  { href: '/#noticias', label: 'Notícias' },
   { href: '/#servicos', label: 'Serviços' },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const pathname = usePathname();
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      if (Math.abs(y - lastScrollY.current) < 5) return;
-      setHidden(y > lastScrollY.current && y > 100);
-      lastScrollY.current = y;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -38,10 +24,7 @@ export function Header() {
 
   return (
     <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 bg-ink border-b border-border-inv transition-transform duration-200',
-        hidden && !open && '-translate-y-full',
-      )}
+      className="fixed inset-x-0 top-0 z-50 bg-ink/80 backdrop-blur-md hidden md:block"
     >
       <div className="wrap flex items-center justify-between h-28">
         <Link href="/" aria-label="Unity Soccer" className="flex items-center">
@@ -70,14 +53,14 @@ export function Header() {
           aria-label="Abrir menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden p-2 text-paper"
+          className="hidden p-2 text-paper"
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {open && (
-        <nav className="md:hidden bg-ink border-t border-border-inv">
+      {open && pathname === '/' && (
+        <nav className="md:hidden bg-ink">
           <ul className="flex flex-col py-4">
             {navItems.map((item) => (
               <li key={item.href}>
