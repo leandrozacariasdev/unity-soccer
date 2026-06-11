@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { contactSchema } from '@/lib/validations';
-import { createAdminClient } from '@/lib/supabase/admin';
+import { createClient } from '@/lib/supabase/server';
 import { resend } from '@/lib/resend';
 
 export async function POST(req: Request) {
@@ -8,9 +8,9 @@ export async function POST(req: Request) {
     const body = await req.json();
     const data = contactSchema.parse(body);
 
-    const supabase = createAdminClient();
+    const supabase = createClient();
 
-    // 1) Salvar no banco
+    // 1) Salvar no banco (via anon — policy permite inserts anônimos)
     const { error: dbError } = await supabase.from('contact_submissions').insert({
       name: data.name,
       email: data.email,
