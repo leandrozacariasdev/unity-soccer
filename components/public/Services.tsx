@@ -49,23 +49,23 @@ export function Services() {
           Serviços <span style={{ color: 'rgba(250,250,248,0.2)' }}>Completos</span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-16 border-t border-paper/5">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12 md:mt-16 border-t border-paper/5">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
               <div
                 key={service.title}
-                className="p-10 border-b border-r border-paper/5 bg-ink hover:bg-ink-soft transition-colors"
+                className="p-6 md:p-10 border-b border-r border-paper/5 bg-ink hover:bg-ink-soft transition-colors"
                 data-reveal
                 data-delay={((i % 3) + 1) as 1 | 2 | 3}
               >
-                <div className="w-10 h-10 flex items-center justify-center mb-7 text-gold">
-                  <Icon size={32} strokeWidth={1.5} />
+                <div className="w-10 h-10 flex items-center justify-center mb-5 md:mb-7 text-gold">
+                  <Icon size={28} strokeWidth={1.5} />
                 </div>
-                <h3 className="font-display text-[1.75rem] tracking-[0.04em] uppercase text-paper mb-4 leading-[1.05]">
+                <h3 className="font-display text-[1.375rem] md:text-[1.75rem] tracking-[0.04em] uppercase text-paper mb-3 md:mb-4 leading-[1.05]">
                   {service.title}
                 </h3>
-                <p className="text-[0.9375rem] text-paper/55 leading-[1.7]">{service.body}</p>
+                <p className="text-[0.875rem] md:text-[0.9375rem] text-paper/55 leading-[1.7]">{service.body}</p>
               </div>
             );
           })}

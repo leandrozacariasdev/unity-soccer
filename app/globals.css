@@ -216,3 +216,32 @@
     background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
   }
 }
+
+@media (max-width: 767px) {
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .section {
+    padding: clamp(3rem, 8vh, 5rem) 0;
+  }
+
+  .btn {
+    min-height: 48px;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.75rem, 8vw, 3rem);
+  }
+
+  .section-label {
+    font-size: 0.625rem;
+  }
+}

@@ -31,7 +31,7 @@ export function About() {
             </Link>
 
             <div
-              className="grid grid-cols-3 mt-12 border-t border-l border-border"
+              className="grid grid-cols-1 sm:grid-cols-3 mt-12 border-t border-l border-border"
               data-reveal
               data-delay="5"
             >
@@ -42,13 +42,13 @@ export function About() {
               ].map((stat) => (
                 <div
                   key={stat.l}
-                  className="p-7 border-r border-b border-border"
+                  className="p-5 sm:p-7 border-r border-b border-border"
                 >
-                  <div className="font-display text-[3.5rem] leading-none tracking-[0.02em] text-ink">
+                  <div className="font-display text-[2.5rem] sm:text-[3.5rem] leading-none tracking-[0.02em] text-ink">
                     {stat.n}
-                    <sup className="text-xl">{stat.s}</sup>
+                    <sup className="text-lg sm:text-xl">{stat.s}</sup>
                   </div>
-                  <div className="text-[0.8125rem] text-smoke tracking-[0.04em] uppercase mt-1.5">
+                  <div className="text-[0.75rem] sm:text-[0.8125rem] text-smoke tracking-[0.04em] uppercase mt-1.5">
                     {stat.l}
                   </div>
                 </div>
