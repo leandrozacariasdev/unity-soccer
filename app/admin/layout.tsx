@@ -1,0 +1,19 @@
+import { createClient } from '@/lib/supabase/server';
+import { redirect } from 'next/navigation';
+import { AdminShell } from '@/components/admin/AdminShell';
+
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const supabase = createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    if (!children) redirect('/admin/login');
+  }
+
+  // Login page não tem sidebar
+  if (!user) {
+    return <>{children}</>;
+  }
+
+  return <AdminShell userEmail={user.email}>{children}</AdminShell>;
+}
