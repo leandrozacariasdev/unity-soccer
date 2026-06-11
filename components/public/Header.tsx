@@ -128,7 +128,7 @@ function Logo() {
         width={200}
         height={80}
         priority
-        className="h-20 w-auto"
+        className="h-20 w-auto invert"
         style={{ opacity: ready ? 1 : 0 }}
       />
       <Image
