@@ -123,7 +123,7 @@ function Logo() {
     <div ref={ref} className="relative inline-block">
       <img
         data-logo
-        src="/images/logo-spin-transparent.png"
+        src="/images/unity-soccer-white.png"
         alt="Unity Soccer"
         width={200}
         height={80}
