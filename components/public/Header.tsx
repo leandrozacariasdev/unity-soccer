@@ -127,7 +127,6 @@ function Logo() {
         alt="Unity Soccer"
         width={200}
         height={80}
-        priority
         className="h-20 w-auto"
         style={{ opacity: ready ? 1 : 0 }}
       />
@@ -137,7 +136,6 @@ function Logo() {
         alt=""
         width={59}
         height={36}
-        priority
         className="absolute pointer-events-none"
         style={{ width: 59, height: 36, left: 0, top: 0, opacity: ready ? 1 : 0 }}
       />
