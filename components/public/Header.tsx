@@ -129,10 +129,7 @@ function Logo() {
         height={80}
         priority
         className="h-20 w-auto"
-        style={{ 
-          opacity: ready ? 1 : 0,
-          filter: 'brightness(0) invert(1)'
-        }}
+        style={{ opacity: ready ? 1 : 0 }}
       />
       <Image
         data-ball
